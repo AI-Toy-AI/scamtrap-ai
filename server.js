@@ -72,7 +72,7 @@ app.get("/", (_req, res) => {
   >
 
   <title>
-    ScamDecoy AI — Let the scammer talk.
+    ScamDecoy AI â€” Let the scammer talk.
   </title>
 
   <meta
@@ -511,7 +511,7 @@ app.get("/", (_req, res) => {
     }
 
     .difference-list li::before {
-      content: "✓";
+      content: "âœ“";
 
       color: #65e6a0;
 
@@ -522,7 +522,7 @@ app.get("/", (_req, res) => {
 
     .difference-card:not(.featured)
     .difference-list li::before {
-      content: "•";
+      content: "â€¢";
 
       color: #718096;
     }
@@ -782,6 +782,32 @@ app.get("/", (_req, res) => {
       margin: auto;
 
       color: #aab5c4;
+    }
+
+    .verse-card {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 34px 30px;
+      text-align: center;
+      border-radius: 20px;
+      border: 1px solid #29405a;
+      background: rgba(10, 22, 38, 0.72);
+    }
+
+    .verse-card blockquote {
+      margin: 0;
+      color: #dce4ee;
+      font-size: 1.15rem;
+      font-style: italic;
+    }
+
+    .verse-card cite {
+      display: block;
+      margin-top: 14px;
+      color: #65e6a0;
+      font-size: 0.9rem;
+      font-style: normal;
+      font-weight: 800;
     }
 
     .future-label {
@@ -1183,23 +1209,23 @@ app.get("/", (_req, res) => {
         <div class="call-line">
 
           <div class="call-pill">
-            📞 Suspicious Caller
+            ðŸ“ž Suspicious Caller
           </div>
 
           <div class="call-arrow">
-            →
+            â†’
           </div>
 
           <div class="call-pill">
-            🛡️ ScamDecoy
+            ðŸ›¡ï¸ ScamDecoy
           </div>
 
           <div class="call-arrow">
-            →
+            â†’
           </div>
 
           <div class="call-pill">
-            💬 Conversation
+            ðŸ’¬ Conversation
           </div>
 
         </div>
@@ -1607,7 +1633,6 @@ app.get("/", (_req, res) => {
 
         </div>
 
-
         <div class="bubble decoy">
 
           <strong>
@@ -1672,7 +1697,7 @@ app.get("/", (_req, res) => {
       <div class="future-feature">
 
         <div class="future-icon">
-          💬
+          ðŸ’¬
         </div>
 
         <h3>
@@ -1725,7 +1750,7 @@ app.get("/", (_req, res) => {
         <div class="card mobile-card">
 
           <div class="card-icon">
-            
+            ï£¿
           </div>
 
           <h3>
@@ -1822,6 +1847,38 @@ app.get("/", (_req, res) => {
     </section>
 
 
+    <!-- BIBLE VERSE -->
+
+    <section>
+
+      <div class="section-title">
+
+        <div class="eyebrow">
+          A reminder
+        </div>
+
+        <h2>
+          Recognize the danger before it gets close.
+        </h2>
+
+      </div>
+
+      <div class="verse-card">
+
+        <blockquote>
+          â€œThe prudent see danger and take refuge,
+          but the simple keep going and pay the penalty.â€
+        </blockquote>
+
+        <cite>
+          â€” Proverbs 22:3
+        </cite>
+
+      </div>
+
+    </section>
+
+
     <!-- PARENTS TRIBUTE -->
 
     <section>
@@ -1829,7 +1886,7 @@ app.get("/", (_req, res) => {
       <div class="tribute">
 
         <div class="tribute-mark">
-          ✦
+          âœ¦
         </div>
 
         <h2>
@@ -1837,11 +1894,13 @@ app.get("/", (_req, res) => {
         </h2>
 
         <p>
-          A quiet thank-you to my parents — for their
-          support, encouragement, and belief in me.
-          One of them is no longer here to see where
-          this journey goes, but their support is still
-          part of it.
+          A quiet thank-you to my parents â€” for their
+          love, support, encouragement, and belief in me.
+          And especially to my dad, whose example and
+          influence continue to inspire me. He may not
+          be here to see where this journey goes, but
+          what he gave me is still part of everything
+          I build.
         </p>
 
       </div>
@@ -1892,7 +1951,7 @@ app.get("/", (_req, res) => {
       ScamDecoy AI
     </span>
 
-    · Defensive call screening
+    Â· Defensive call screening
 
   </footer>
 
@@ -2304,7 +2363,7 @@ Do NOT sound like:
 Do not sound overly polished, cheerful, professional, helpful, or eager to assist.
 
 
-CALL OPENING — IMPORTANT:
+CALL OPENING â€” IMPORTANT:
 
 Answer the call naturally and immediately.
 
@@ -3102,7 +3161,7 @@ Most importantly, sound like an ordinary person having a casual phone conversati
 
           /*
           Twilio and OpenAI both support
-          G.711 μ-law / PCMU at 8 kHz,
+          G.711 Î¼-law / PCMU at 8 kHz,
           so the phone audio can be forwarded
           without transcoding.
           */
@@ -3204,7 +3263,7 @@ server.listen(
   () => {
 
     console.log(
-      `ScamTrap AI voice server listening on port ${PORT}`
+      `ScamDecoy AI voice server listening on port ${PORT}`
     );
 
   }
