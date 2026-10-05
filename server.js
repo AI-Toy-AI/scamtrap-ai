@@ -26,12 +26,376 @@ if (!OPENAI_API_KEY) {
 }
 
 app.get("/", (_req, res) => {
-  res.json({
-    name: "ScamTrap AI Voice Agent",
-    status: "online",
-    voice_webhook: "/voice",
-    media_stream: "/media-stream"
-  });
+  res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScamTrap AI — Let Scammers Talk</title>
+  <meta name="description" content="ScamTrap is an AI-powered phone agent designed to engage suspicious callers naturally while protecting your private information.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #08111f;
+      color: #f5f7fa;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(1050px, 90%);
+      margin: auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .logo span {
+      color: #65e6a0;
+    }
+
+    nav a {
+      color: #aab5c4;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 90px 0 80px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid #26374d;
+      color: #65e6a0;
+      background: #0e1b2d;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin: 25px 0;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: auto;
+      color: #aab5c4;
+      font-size: 1.15rem;
+    }
+
+    .buttons {
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 24px;
+      margin: 6px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .primary {
+      background: #65e6a0;
+      color: #06130c;
+    }
+
+    .secondary {
+      background: #122238;
+      color: white;
+      border: 1px solid #26374d;
+    }
+
+    section {
+      padding: 65px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-title h2 {
+      font-size: 2.3rem;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #aab5c4;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: #0e1b2d;
+      border: 1px solid #1c2b40;
+      border-radius: 16px;
+      padding: 25px;
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .card p {
+      color: #aab5c4;
+    }
+
+    .steps {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .step {
+      display: flex;
+      gap: 18px;
+      padding: 20px;
+      margin-bottom: 12px;
+      background: #0e1b2d;
+      border: 1px solid #1c2b40;
+      border-radius: 14px;
+    }
+
+    .number {
+      min-width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #173b2a;
+      color: #65e6a0;
+      font-weight: 800;
+    }
+
+    .step h3 {
+      margin: 0 0 4px;
+    }
+
+    .step p {
+      margin: 0;
+      color: #aab5c4;
+    }
+
+    .cta {
+      text-align: center;
+      background: #0e1b2d;
+      border: 1px solid #1c2b40;
+      border-radius: 20px;
+      padding: 45px 20px;
+      margin: 60px 0;
+    }
+
+    .cta p {
+      color: #aab5c4;
+      max-width: 620px;
+      margin: 10px auto 25px;
+    }
+
+    footer {
+      text-align: center;
+      color: #718096;
+      padding: 30px 0 40px;
+      border-top: 1px solid #182638;
+    }
+
+    @media (max-width: 750px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 60px;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <nav>
+      <div class="logo">Scam<span>Trap</span></div>
+      <a href="#how">How it works</a>
+    </nav>
+
+    <main>
+
+      <section class="hero">
+        <div class="badge">AI-powered call protection</div>
+
+        <h1>
+          Don't just block the scam.<br>
+          Let them talk.
+        </h1>
+
+        <p>
+          ScamTrap is an AI phone agent designed to handle suspicious callers
+          naturally, keep them talking, and protect the private information
+          that matters.
+        </p>
+
+        <div class="buttons">
+          <a class="button primary" href="#how">See how it works</a>
+          <a class="button secondary" href="#about">Learn more</a>
+        </div>
+      </section>
+
+      <section id="about">
+
+        <div class="section-title">
+          <h2>Built for suspicious calls</h2>
+
+          <p>
+            Instead of immediately confronting a suspicious caller,
+            ScamTrap can respond naturally and give them room to explain
+            themselves.
+          </p>
+        </div>
+
+        <div class="cards">
+
+          <div class="card">
+            <h3>Sounds natural</h3>
+            <p>
+              ScamTrap uses short, conversational responses designed to
+              feel more like a normal phone conversation than a scripted
+              automated system.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Keeps them talking</h3>
+            <p>
+              The agent lets callers explain what they want instead of
+              immediately confronting them or announcing that they're
+              dealing with an AI.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Protects private information</h3>
+            <p>
+              ScamTrap is designed not to disclose sensitive credentials
+              or private information about the person it represents.
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section id="how">
+
+        <div class="section-title">
+          <h2>How ScamTrap works</h2>
+
+          <p>
+            A suspicious phone call becomes a conversation handled by the
+            ScamTrap voice agent.
+          </p>
+        </div>
+
+        <div class="steps">
+
+          <div class="step">
+            <div class="number">1</div>
+            <div>
+              <h3>A suspicious caller rings</h3>
+              <p>
+                The call is routed through the ScamTrap phone number.
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="number">2</div>
+            <div>
+              <h3>ScamTrap answers naturally</h3>
+              <p>
+                The agent responds like someone who simply answered their phone.
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="number">3</div>
+            <div>
+              <h3>The caller does the talking</h3>
+              <p>
+                Natural conversation gives suspicious callers room to explain
+                why they're calling.
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="number">4</div>
+            <div>
+              <h3>Private information stays protected</h3>
+              <p>
+                ScamTrap follows its protection and call-termination behavior
+                when sensitive information is targeted.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <div class="cta">
+        <h2>Give suspicious callers someone to talk to.</h2>
+
+        <p>
+          ScamTrap is built around one simple idea:
+          suspicious callers don't need to know they've reached an AI agent.
+        </p>
+
+        <a class="button primary" href="#how">Get started</a>
+      </div>
+
+    </main>
+
+    <footer>
+      ScamTrap AI · Defensive call screening
+    </footer>
+
+  </div>
+
+</body>
+</html>`);
 });
 
 app.get("/health", (_req, res) => {
