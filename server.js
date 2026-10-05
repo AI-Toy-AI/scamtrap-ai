@@ -10,6 +10,11 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.use((req, res, next) => {
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
+  next();
+});
+
 const server = http.createServer(app);
 
 const wss = new WebSocketServer({
