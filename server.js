@@ -784,30 +784,57 @@ app.get("/", (_req, res) => {
       color: #aab5c4;
     }
 
-    .verse-card {
+        .verse-card {
       max-width: 850px;
+
       margin: 0 auto;
+
       padding: 34px 30px;
+
       text-align: center;
+
       border-radius: 20px;
-      border: 1px solid #29405a;
-      background: rgba(10, 22, 38, 0.72);
+
+      border:
+        1px solid #29405a;
+
+      background:
+        rgba(
+          10,
+          22,
+          38,
+          0.72
+        );
     }
+
 
     .verse-card blockquote {
+
       margin: 0;
+
       color: #dce4ee;
+
       font-size: 1.15rem;
+
       font-style: italic;
+
     }
 
+
     .verse-card cite {
+
       display: block;
+
       margin-top: 14px;
+
       color: #65e6a0;
+
       font-size: 0.9rem;
+
       font-style: normal;
+
       font-weight: 800;
+
     }
 
     .future-label {
@@ -1847,7 +1874,7 @@ app.get("/", (_req, res) => {
     </section>
 
 
-    <!-- BIBLE VERSE -->
+        <!-- BIBLE VERSE -->
 
     <section>
 
@@ -1857,21 +1884,26 @@ app.get("/", (_req, res) => {
           A reminder
         </div>
 
+
         <h2>
           Recognize the danger before it gets close.
         </h2>
 
       </div>
 
+
       <div class="verse-card">
 
         <blockquote>
-          â€œThe prudent see danger and take refuge,
-          but the simple keep going and pay the penalty.â€
+
+          &ldquo;The prudent see danger and take refuge,
+          but the simple keep going and pay the penalty.&rdquo;
+
         </blockquote>
 
+
         <cite>
-          â€” Proverbs 22:3
+          &mdash; Proverbs 22:3
         </cite>
 
       </div>
@@ -1886,21 +1918,26 @@ app.get("/", (_req, res) => {
       <div class="tribute">
 
         <div class="tribute-mark">
-          âœ¦
+          &#10022;
         </div>
+
 
         <h2>
           Built with the people who believed in me.
         </h2>
 
+
         <p>
-          A quiet thank-you to my parents â€” for their
+
+          A quiet thank-you to my parents &mdash; for their
           love, support, encouragement, and belief in me.
+
           And especially to my dad, whose example and
           influence continue to inspire me. He may not
           be here to see where this journey goes, but
           what he gave me is still part of everything
           I build.
+
         </p>
 
       </div>
