@@ -77,8 +77,8 @@ app.get("/", (_req, res) => {
   >
 
   <title>
-    ScamDecoy AI â€” Let the scammer talk.
-  </title>
+  ScamDecoy AI &mdash; Let the scammer talk.
+</title>
 
   <meta
     name="description"
@@ -516,7 +516,7 @@ app.get("/", (_req, res) => {
     }
 
     .difference-list li::before {
-      content: "âœ“";
+            content: "\2713";
 
       color: #65e6a0;
 
@@ -527,7 +527,7 @@ app.get("/", (_req, res) => {
 
     .difference-card:not(.featured)
     .difference-list li::before {
-      content: "â€¢";
+            content: "\2022";
 
       color: #718096;
     }
@@ -1241,25 +1241,24 @@ app.get("/", (_req, res) => {
         <div class="call-line">
 
           <div class="call-pill">
-            ðŸ“ž Suspicious Caller
-          </div>
+  &#128222; Suspicious Caller
+</div>
 
-          <div class="call-arrow">
-            â†’
-          </div>
+<div class="call-arrow">
+  &#8594;
+</div>
 
-          <div class="call-pill">
-            ðŸ›¡ï¸ ScamDecoy
-          </div>
+<div class="call-pill">
+  &#128737;&#65039; ScamDecoy
+</div>
 
-          <div class="call-arrow">
-            â†’
-          </div>
+<div class="call-arrow">
+  &#8594;
+</div>
 
-          <div class="call-pill">
-            ðŸ’¬ Conversation
-          </div>
-
+<div class="call-pill">
+  &#128172; Conversation
+</div>
         </div>
 
         <div class="call-caption">
@@ -1729,8 +1728,8 @@ app.get("/", (_req, res) => {
       <div class="future-feature">
 
         <div class="future-icon">
-          ðŸ’¬
-        </div>
+  &#128172;
+</div>
 
         <h3>
           ScamDecoy Text Protection
@@ -1782,8 +1781,8 @@ app.get("/", (_req, res) => {
         <div class="card mobile-card">
 
           <div class="card-icon">
-            ï£¿
-          </div>
+  iOS
+</div>
 
           <h3>
             iPhone &amp; iPad
@@ -1923,8 +1922,8 @@ app.get("/", (_req, res) => {
       <div class="tribute">
 
         <div class="tribute-mark">
-          &#10022;
-        </div>
+  &#10022;
+</div>
 
 
         <h2>
