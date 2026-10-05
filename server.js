@@ -43,11 +43,14 @@ app.get("/health", (_req, res) => {
 app.all("/voice", (req, res) => {
   const response = new twilio.twiml.VoiceResponse();
 
-  const host =
-    req.get("host") ||
-    new URL(PUBLIC_BASE_URL || `http://localhost:${PORT}`).host;
+// Let the caller hear roughly 3 rings before the call is answered.
+response.pause({ length: 6 });
 
-  const connect = response.connect();
+const host =
+    req.get("host") ||
+    new URL(PUBLIC_BASE_URL || 'http://localhost').host;
+
+const connect = response.connect();
   connect.stream({
     url: `wss://${host}/media-stream`
   });
