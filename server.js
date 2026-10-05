@@ -26,33 +26,78 @@ if (!OPENAI_API_KEY) {
   console.warn("OPENAI_API_KEY is not set.");
 }
 
+
+/*
+=========================================================
+SCAMDECOY WEBSITE
+=========================================================
+*/
+
 app.get("/", (_req, res) => {
   res.send(`<!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ScamDecoy AI — Let Scammers Talk</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    ScamDecoy AI — Let the scammer talk.
+  </title>
+
   <meta
     name="description"
-    content="ScamDecoy is an AI-powered phone agent designed to engage suspicious callers naturally while protecting your private information."
+    content="ScamDecoy answers suspicious calls, talks naturally, and keeps the conversation away from you."
   >
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #08111f;
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          #173252 0%,
+          #08111f 45%,
+          #050b14 100%
+        );
+
       color: #f5f7fa;
       line-height: 1.6;
     }
 
+    body::selection {
+      background: #65e6a0;
+      color: #06130c;
+    }
+
+    a {
+      color: inherit;
+    }
+
     .container {
-      width: min(1050px, 90%);
+      width: min(1120px, 90%);
       margin: auto;
     }
 
@@ -60,65 +105,111 @@ app.get("/", (_req, res) => {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 24px 0;
+      padding: 25px 0;
+      position: relative;
+      z-index: 10;
     }
 
     .logo {
-      font-size: 1.4rem;
-      font-weight: 800;
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
     }
 
     .logo span {
       color: #65e6a0;
     }
 
-    nav a {
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
       color: #aab5c4;
       text-decoration: none;
-      margin-left: 18px;
+      font-size: 0.95rem;
     }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+
+    /* HERO */
 
     .hero {
       text-align: center;
-      padding: 90px 0 80px;
+      padding: 95px 0 90px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: rgba(101, 230, 160, 0.07);
+      filter: blur(70px);
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      pointer-events: none;
     }
 
     .badge {
       display: inline-block;
-      padding: 7px 14px;
+      padding: 8px 15px;
       border-radius: 999px;
-      border: 1px solid #26374d;
+      border: 1px solid #29405a;
       color: #65e6a0;
-      background: #0e1b2d;
-      font-size: 14px;
-      font-weight: 700;
+      background: rgba(14, 27, 45, 0.85);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      position: relative;
     }
 
     h1 {
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      line-height: 1;
-      letter-spacing: -3px;
-      margin: 25px 0;
+      font-size: clamp(3.1rem, 8vw, 6.5rem);
+      line-height: 0.94;
+      letter-spacing: -5px;
+      margin: 28px 0 28px;
+      position: relative;
+    }
+
+    .hero-highlight {
+      color: #65e6a0;
     }
 
     .hero p {
-      max-width: 680px;
+      max-width: 720px;
       margin: auto;
       color: #aab5c4;
-      font-size: 1.15rem;
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      position: relative;
     }
 
     .buttons {
-      margin-top: 30px;
+      margin-top: 34px;
+      position: relative;
     }
 
     .button {
       display: inline-block;
-      padding: 14px 24px;
+      padding: 14px 23px;
       margin: 6px;
-      border-radius: 10px;
+      border-radius: 11px;
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 800;
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
     }
 
     .primary {
@@ -128,29 +219,150 @@ app.get("/", (_req, res) => {
 
     .secondary {
       background: #122238;
-      color: white;
-      border: 1px solid #26374d;
+      color: #ffffff;
+      border: 1px solid #29405a;
     }
 
+
+    /* CALL VISUAL */
+
+    .call-visual {
+      max-width: 760px;
+      margin: 35px auto 0;
+      padding: 22px;
+      border-radius: 20px;
+      background: rgba(10, 22, 38, 0.85);
+      border: 1px solid #20344b;
+      box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.28);
+    }
+
+    .call-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 13px;
+      flex-wrap: wrap;
+      color: #dce4ee;
+      font-weight: 800;
+    }
+
+    .call-pill {
+      padding: 10px 15px;
+      border-radius: 999px;
+      background: #122238;
+      border: 1px solid #29405a;
+    }
+
+    .call-arrow {
+      color: #65e6a0;
+      font-size: 1.25rem;
+    }
+
+    .call-caption {
+      margin-top: 13px;
+      color: #718096;
+      font-size: 0.88rem;
+    }
+
+
+    /* GENERAL SECTIONS */
+
     section {
-      padding: 65px 0;
+      padding: 85px 0;
     }
 
     .section-title {
       text-align: center;
-      margin-bottom: 35px;
+      margin-bottom: 45px;
+    }
+
+    .eyebrow {
+      color: #65e6a0;
+      font-size: 0.78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 9px;
     }
 
     .section-title h2 {
-      font-size: 2.3rem;
-      margin-bottom: 10px;
+      font-size: clamp(2.1rem, 5vw, 3.4rem);
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin: 0 0 15px;
     }
 
     .section-title p {
       color: #aab5c4;
-      max-width: 650px;
+      max-width: 720px;
+      margin: auto;
+      font-size: 1.05rem;
+    }
+
+
+    /* DIFFERENT */
+
+    .difference {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 900px;
       margin: auto;
     }
+
+    .difference-card {
+      padding: 30px;
+      border-radius: 20px;
+      border: 1px solid #1c2b40;
+      background: #0b1728;
+    }
+
+    .difference-card.featured {
+      border-color: #315c49;
+      background:
+        linear-gradient(
+          145deg,
+          #102a21,
+          #0c1929
+        );
+    }
+
+    .difference-card h3 {
+      margin-top: 0;
+      font-size: 1.35rem;
+    }
+
+    .difference-card p {
+      color: #aab5c4;
+    }
+
+    .difference-list {
+      padding: 0;
+      margin: 22px 0 0;
+      list-style: none;
+    }
+
+    .difference-list li {
+      margin: 13px 0;
+      color: #c9d2de;
+    }
+
+    .difference-list li::before {
+      content: "✓";
+      color: #65e6a0;
+      font-weight: 900;
+      margin-right: 9px;
+    }
+
+    .difference-card:not(.featured)
+    .difference-list li::before {
+      content: "•";
+      color: #718096;
+    }
+
+
+    /* CARDS */
 
     .cards {
       display: grid;
@@ -161,46 +373,63 @@ app.get("/", (_req, res) => {
     .card {
       background: #0e1b2d;
       border: 1px solid #1c2b40;
-      border-radius: 16px;
-      padding: 25px;
+      border-radius: 18px;
+      padding: 28px;
+    }
+
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #173b2a;
+      color: #65e6a0;
+      font-weight: 900;
+      margin-bottom: 18px;
     }
 
     .card h3 {
       margin-top: 0;
+      font-size: 1.2rem;
     }
 
     .card p {
       color: #aab5c4;
+      margin-bottom: 0;
     }
 
+
+    /* HOW IT WORKS */
+
     .steps {
-      max-width: 800px;
+      max-width: 850px;
       margin: auto;
     }
 
     .step {
       display: flex;
       gap: 18px;
-      padding: 20px;
-      margin-bottom: 12px;
+      padding: 22px;
+      margin-bottom: 13px;
       background: #0e1b2d;
       border: 1px solid #1c2b40;
-      border-radius: 14px;
+      border-radius: 16px;
     }
 
     .number {
-      min-width: 40px;
-      height: 40px;
+      min-width: 42px;
+      height: 42px;
       display: grid;
       place-items: center;
       border-radius: 50%;
       background: #173b2a;
       color: #65e6a0;
-      font-weight: 800;
+      font-weight: 900;
     }
 
     .step h3 {
-      margin: 0 0 4px;
+      margin: 0 0 5px;
     }
 
     .step p {
@@ -208,338 +437,864 @@ app.get("/", (_req, res) => {
       color: #aab5c4;
     }
 
-    .cta {
-      text-align: center;
-      background: #0e1b2d;
+
+    /* CONVERSATION */
+
+    .conversation {
+      max-width: 760px;
+      margin: auto;
+      padding: 28px;
+      background: #0a1626;
       border: 1px solid #1c2b40;
       border-radius: 20px;
-      padding: 45px 20px;
-      margin: 60px 0;
+    }
+
+    .conversation-label {
+      color: #718096;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 1.3px;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    .bubble {
+      padding: 14px 17px;
+      border-radius: 16px;
+      margin: 12px 0;
+      max-width: 82%;
+    }
+
+    .caller {
+      background: #17273c;
+      margin-right: auto;
+      color: #dce4ee;
+    }
+
+    .decoy {
+      background: #173b2a;
+      margin-left: auto;
+      color: #e9fff2;
+    }
+
+    .bubble strong {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 4px;
+      opacity: 0.7;
+    }
+
+
+    /* MOBILE */
+
+    .mobile-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .coming {
+      display: inline-block;
+      margin-top: 17px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid #29405a;
+      color: #aab5c4;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+
+    /* CTA */
+
+    .cta {
+      text-align: center;
+      background:
+        radial-gradient(
+          circle at center,
+          #173b2a 0%,
+          #0e1b2d 55%,
+          #0b1524 100%
+        );
+      border: 1px solid #315c49;
+      border-radius: 24px;
+      padding: 65px 25px;
+      margin: 75px 0;
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin: 0 0 15px;
     }
 
     .cta p {
       color: #aab5c4;
-      max-width: 620px;
+      max-width: 680px;
       margin: 10px auto 25px;
     }
+
 
     footer {
       text-align: center;
       color: #718096;
-      padding: 30px 0 40px;
+      padding: 35px 0 45px;
       border-top: 1px solid #182638;
+      font-size: 0.9rem;
     }
 
-    @media (max-width: 750px) {
+    .footer-name {
+      color: #aab5c4;
+      font-weight: 800;
+    }
+
+
+    @media (max-width: 800px) {
+
       .cards {
         grid-template-columns: 1fr;
       }
 
+      .difference {
+        grid-template-columns: 1fr;
+      }
+
       .hero {
-        padding-top: 60px;
+        padding-top: 65px;
       }
 
       h1 {
-        letter-spacing: -2px;
+        letter-spacing: -3px;
       }
 
-      nav {
-        align-items: flex-start;
+    }
+
+
+    @media (max-width: 600px) {
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-links a {
+        font-size: 0.82rem;
+      }
+
+      .hero {
+        padding-top: 50px;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 15vw, 4.6rem);
+        letter-spacing: -3px;
+      }
+
+      .call-line {
         flex-direction: column;
       }
 
-      nav a {
-        margin-left: 0;
-        margin-right: 14px;
+      .call-arrow {
+        transform: rotate(90deg);
       }
+
+      .bubble {
+        max-width: 92%;
+      }
+
+      section {
+        padding: 65px 0;
+      }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <nav>
-      <div class="logo">Scam<span>Decoy</span></div>
 
-      <div>
-        <a href="#how">How it works</a>
-        <a href="#mobile">Mobile Apps</a>
+  <!-- NAVIGATION -->
+
+  <nav>
+
+    <div class="logo">
+      Scam<span>Decoy</span>
+    </div>
+
+    <div class="nav-links">
+      <a href="#why">Why ScamDecoy</a>
+      <a href="#how">How it works</a>
+      <a href="#mobile">Mobile</a>
+    </div>
+
+  </nav>
+
+
+  <main>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="badge">
+        AI-powered defensive call protection
       </div>
-    </nav>
 
-    <main>
-
-      <section class="hero">
-
-        <div class="badge">
-          AI-powered call protection
-        </div>
-
-        <h1>
-          Don't just block the scam.<br>
-          Let them talk.
-        </h1>
-
-        <p>
-          ScamDecoy is an AI phone agent designed to handle suspicious callers
-          naturally, keep them talking, and protect the private information
-          that matters.
-        </p>
-
-        <div class="buttons">
-          <a class="button primary" href="#how">
-            See how it works
-          </a>
-
-          <a class="button secondary" href="#about">
-            Learn more
-          </a>
-        </div>
-
-      </section>
-
-
-      <section id="about">
-
-        <div class="section-title">
-
-          <h2>Built for suspicious calls</h2>
-
-          <p>
-            Instead of immediately confronting a suspicious caller,
-            ScamDecoy can respond naturally and give them room to explain
-            themselves.
-          </p>
-
-        </div>
-
-
-        <div class="cards">
-
-          <div class="card">
-
-            <h3>Sounds natural</h3>
-
-            <p>
-              ScamDecoy uses short, conversational responses designed to
-              feel more like a normal phone conversation than a scripted
-              automated system.
-            </p>
-
-          </div>
-
-
-          <div class="card">
-
-            <h3>Keeps them talking</h3>
-
-            <p>
-              The agent lets callers explain what they want instead of
-              immediately confronting them or announcing that they're
-              dealing with an AI.
-            </p>
-
-          </div>
-
-
-          <div class="card">
-
-            <h3>Protects private information</h3>
-
-            <p>
-              ScamDecoy is designed not to disclose sensitive credentials
-              or private information about the person it represents.
-            </p>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <section id="how">
-
-        <div class="section-title">
-
-          <h2>How ScamDecoy works</h2>
-
-          <p>
-            A suspicious phone call becomes a conversation handled by the
-            ScamDecoy voice agent.
-          </p>
-
-        </div>
-
-
-        <div class="steps">
-
-          <div class="step">
-
-            <div class="number">1</div>
-
-            <div>
-
-              <h3>A suspicious caller rings</h3>
-
-              <p>
-                The call is routed through the ScamTrap phone number.
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <div class="step">
-
-            <div class="number">2</div>
-
-            <div>
-
-              <h3>ScamDecoy answers naturally</h3>
-
-              <p>
-                The agent responds like someone who simply answered their phone.
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <div class="step">
-
-            <div class="number">3</div>
-
-            <div>
-
-              <h3>The caller does the talking</h3>
-
-              <p>
-                Natural conversation gives suspicious callers room to explain
-                why they're calling.
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <div class="step">
-
-            <div class="number">4</div>
-
-            <div>
-
-              <h3>Private information stays protected</h3>
-
-              <p>
-                ScamDecoy follows its protection and call-termination behavior
-                when sensitive information is targeted.
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <section id="mobile">
-
-        <div class="section-title">
-
-          <h2>ScamDecoy on Mobile</h2>
-
-          <p>
-            ScamDecoy is coming to your phone. Dedicated iOS and Android
-            applications are currently in development and will be added here
-            when they're ready.
-          </p>
-
-        </div>
-
-
-        <div class="cards">
-
-          <div class="card">
-
-            <h3>iPhone &amp; iPad</h3>
-
-            <p>
-              The ScamDecoy iOS app is coming soon. We'll add the App Store
-              download here when it's available.
-            </p>
-
-            <span
-              class="button secondary"
-              style="opacity:0.6; cursor:default;"
-            >
-              Coming Soon
-            </span>
-
-          </div>
-
-
-          <div class="card">
-
-            <h3>Android</h3>
-
-            <p>
-              The ScamDecoy Android app is coming soon. We'll add the Google Play
-              download here when it's available.
-            </p>
-
-            <span
-              class="button secondary"
-              style="opacity:0.6; cursor:default;"
-            >
-              Coming Soon
-            </span>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <div class="cta">
-
-        <h2>
-          Give suspicious callers someone to talk to.
-        </h2>
-
-        <p>
-          ScamDecoy is built around one simple idea:
-          suspicious callers don't need to know they've reached an AI agent.
-        </p>
-
-        <a class="button primary" href="#how">
-          Get started
+      <h1>
+        Scammers called<br>
+        the <span class="hero-highlight">wrong number.</span>
+      </h1>
+
+      <p>
+        ScamDecoy answers suspicious calls, talks naturally,
+        and keeps the conversation away from you.
+      </p>
+
+      <div class="buttons">
+
+        <a
+          class="button primary"
+          href="#how"
+        >
+          See how it works
+        </a>
+
+        <a
+          class="button secondary"
+          href="#why"
+        >
+          Why ScamDecoy?
         </a>
 
       </div>
 
-    </main>
+
+      <div class="call-visual">
+
+        <div class="call-line">
+
+          <div class="call-pill">
+            📞 Suspicious Caller
+          </div>
+
+          <div class="call-arrow">
+            →
+          </div>
+
+          <div class="call-pill">
+            🛡️ ScamDecoy
+          </div>
+
+          <div class="call-arrow">
+            →
+          </div>
+
+          <div class="call-pill">
+            💬 Conversation
+          </div>
+
+        </div>
+
+        <div class="call-caption">
+          Instead of simply blocking the call, ScamDecoy can answer it.
+        </div>
+
+      </div>
+
+    </section>
 
 
-    <footer>
-      ScamDecoy AI · Defensive call screening
-    </footer>
+    <!-- WHY SCAMDECOY -->
 
-  </div>
+    <section id="why">
+
+      <div class="section-title">
+
+        <div class="eyebrow">
+          A different approach
+        </div>
+
+        <h2>
+          Blocking isn't the only answer.
+        </h2>
+
+        <p>
+          Most call protection focuses on identifying, filtering,
+          silencing, or blocking suspicious callers.
+          ScamDecoy takes a different approach:
+          <strong>give the caller someone else to talk to.</strong>
+        </p>
+
+      </div>
+
+
+      <div class="difference">
+
+
+        <div class="difference-card">
+
+          <h3>
+            Traditional call protection
+          </h3>
+
+          <p>
+            The goal is usually to keep suspicious calls
+            away from you.
+          </p>
+
+          <ul class="difference-list">
+
+            <li>
+              Detect suspicious calls
+            </li>
+
+            <li>
+              Identify or flag the caller
+            </li>
+
+            <li>
+              Block or silence the call
+            </li>
+
+            <li>
+              Move on with your day
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <div class="difference-card featured">
+
+          <h3>
+            ScamDecoy
+          </h3>
+
+          <p>
+            The goal is to keep the conversation
+            away from you.
+          </p>
+
+          <ul class="difference-list">
+
+            <li>
+              Answers suspicious calls
+            </li>
+
+            <li>
+              Responds naturally
+            </li>
+
+            <li>
+              Lets the caller explain themselves
+            </li>
+
+            <li>
+              Keeps sensitive information protected
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CORE FEATURES -->
+
+    <section>
+
+      <div class="section-title">
+
+        <div class="eyebrow">
+          Built differently
+        </div>
+
+        <h2>
+          Built to talk. Not just detect.
+        </h2>
+
+        <p>
+          ScamDecoy is designed around the conversation itself.
+        </p>
+
+      </div>
+
+
+      <div class="cards">
+
+
+        <div class="card">
+
+          <div class="card-icon">
+            01
+          </div>
+
+          <h3>
+            Natural conversation
+          </h3>
+
+          <p>
+            Short, casual responses designed to feel more
+            like a normal phone conversation than a scripted
+            automated system.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="card-icon">
+            02
+          </div>
+
+          <h3>
+            Caller-led interaction
+          </h3>
+
+          <p>
+            The caller does most of the talking.
+            ScamDecoy listens, reacts, and gives them room
+            to explain what they want.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="card-icon">
+            03
+          </div>
+
+          <h3>
+            Privacy-first behavior
+          </h3>
+
+          <p>
+            ScamDecoy is designed not to provide passwords,
+            verification codes, financial credentials,
+            or other protected information.
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- HOW IT WORKS -->
+
+    <section id="how">
+
+      <div class="section-title">
+
+        <div class="eyebrow">
+          Inside the call
+        </div>
+
+        <h2>
+          A scam call doesn't have to reach you.
+        </h2>
+
+        <p>
+          ScamDecoy turns a suspicious incoming call
+          into a conversation handled by the voice agent.
+        </p>
+
+      </div>
+
+
+      <div class="steps">
+
+
+        <div class="step">
+
+          <div class="number">
+            1
+          </div>
+
+          <div>
+
+            <h3>
+              A suspicious caller rings
+            </h3>
+
+            <p>
+              The call is routed through the ScamTrap phone number.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="number">
+            2
+          </div>
+
+          <div>
+
+            <h3>
+              ScamDecoy answers
+            </h3>
+
+            <p>
+              A natural voice answers like someone who simply
+              picked up their phone.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="number">
+            3
+          </div>
+
+          <div>
+
+            <h3>
+              The caller starts talking
+            </h3>
+
+            <p>
+              ScamDecoy lets the caller explain who they are
+              and why they're calling.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="number">
+            4
+          </div>
+
+          <div>
+
+            <h3>
+              The conversation continues
+            </h3>
+
+            <p>
+              Short, natural responses give the caller room
+              to keep talking without feeling interrogated.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="number">
+            5
+          </div>
+
+          <div>
+
+            <h3>
+              Sensitive information stays protected
+            </h3>
+
+            <p>
+              ScamDecoy does not provide protected credentials
+              or private information and can terminate the call
+              when sensitive information is targeted.
+            </p>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- EXAMPLE CONVERSATION -->
+
+    <section>
+
+      <div class="section-title">
+
+        <div class="eyebrow">
+          What it sounds like
+        </div>
+
+        <h2>
+          Less script. More conversation.
+        </h2>
+
+        <p>
+          ScamDecoy isn't built to interrogate a caller.
+          It's built to let them talk.
+        </p>
+
+      </div>
+
+
+      <div class="conversation">
+
+        <div class="conversation-label">
+          Example interaction
+        </div>
+
+
+        <div class="bubble caller">
+
+          <strong>
+            Caller
+          </strong>
+
+          Hi, I'm calling about an issue with your account.
+
+        </div>
+
+
+        <div class="bubble decoy">
+
+          <strong>
+            ScamDecoy
+          </strong>
+
+          Oh, okay. What's going on?
+
+        </div>
+
+
+        <div class="bubble caller">
+
+          <strong>
+            Caller
+          </strong>
+
+          We need to verify some information.
+
+        </div>
+
+
+        <div class="bubble decoy">
+
+          <strong>
+            ScamDecoy
+          </strong>
+
+          Yeah? What information?
+
+        </div>
+
+
+        <div class="bubble caller">
+
+          <strong>
+            Caller
+          </strong>
+
+          We just need to confirm a few things first.
+
+        </div>
+
+
+        <div class="bubble decoy">
+
+          <strong>
+            ScamDecoy
+          </strong>
+
+          Okay... go ahead.
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- MOBILE -->
+
+    <section id="mobile">
+
+      <div class="section-title">
+
+        <div class="eyebrow">
+          Coming next
+        </div>
+
+        <h2>
+          ScamDecoy is just getting started.
+        </h2>
+
+        <p>
+          Dedicated mobile applications are currently
+          in development and will be added here when they're ready.
+        </p>
+
+      </div>
+
+
+      <div class="cards">
+
+
+        <div class="card mobile-card">
+
+          <div class="card-icon">
+            
+          </div>
+
+          <h3>
+            iPhone &amp; iPad
+          </h3>
+
+          <p>
+            Bring ScamDecoy directly to your Apple devices.
+            We'll add the App Store download here when the
+            application is available.
+          </p>
+
+          <span class="coming">
+            Coming Soon
+          </span>
+
+        </div>
+
+
+        <div class="card mobile-card">
+
+          <div class="card-icon">
+            A
+          </div>
+
+          <h3>
+            Android
+          </h3>
+
+          <p>
+            Bring ScamDecoy directly to your Android phone.
+            We'll add the Google Play download here when the
+            application is available.
+          </p>
+
+          <span class="coming">
+            Coming Soon
+          </span>
+
+        </div>
+
+
+        <div class="card mobile-card">
+
+          <div class="card-icon">
+            +
+          </div>
+
+          <h3>
+            More protection
+          </h3>
+
+          <p>
+            ScamDecoy is being built with room to grow.
+            Future versions can expand how suspicious calls
+            are handled and protected.
+          </p>
+
+          <span class="coming">
+            In Development
+          </span>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- BRAND STATEMENT -->
+
+    <section>
+
+      <div class="cta">
+
+        <div class="eyebrow">
+          The ScamDecoy idea
+        </div>
+
+        <h2>
+          The goal isn't to make you<br>
+          better at dealing with scammers.
+        </h2>
+
+        <p>
+          It's to make sure you don't have to.
+          Let ScamDecoy take the call,
+          keep the conversation going,
+          and keep you out of it.
+        </p>
+
+        <a
+          class="button primary"
+          href="#how"
+        >
+          See how it works
+        </a>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <footer>
+
+    <span class="footer-name">
+      ScamDecoy AI
+    </span>
+
+    · Defensive call screening
+
+  </footer>
+
+
+</div>
 
 </body>
 </html>`);
-
 });
 
+
+/*
+=========================================================
+HEALTH CHECK
+=========================================================
+*/
 
 app.get("/health", (_req, res) => {
 
@@ -551,8 +1306,11 @@ app.get("/health", (_req, res) => {
 });
 
 
-// Twilio sends the incoming call here.
-// This creates a bidirectional Media Stream so the AI can hear and speak.
+/*
+=========================================================
+TWILIO VOICE WEBHOOK
+=========================================================
+*/
 
 app.all("/voice", (req, res) => {
 
@@ -563,7 +1321,9 @@ app.all("/voice", (req, res) => {
 
   const host =
     req.get("host") ||
-    new URL(PUBLIC_BASE_URL || "http://localhost").host;
+    new URL(
+      PUBLIC_BASE_URL || "http://localhost"
+    ).host;
 
   const connect = response.connect();
 
@@ -571,196 +1331,287 @@ app.all("/voice", (req, res) => {
     url: `wss://${host}/media-stream`
   });
 
-  res.type("text/xml").send(response.toString());
+  res
+    .type("text/xml")
+    .send(response.toString());
 
 });
 
 
-server.on("upgrade", (request, socket, head) => {
+/*
+=========================================================
+WEBSOCKET UPGRADE
+=========================================================
+*/
 
-  if (request.url !== "/media-stream") {
-    socket.destroy();
-    return;
-  }
+server.on(
+  "upgrade",
+  (request, socket, head) => {
 
-  wss.handleUpgrade(request, socket, head, (ws) => {
-    wss.emit("connection", ws, request);
-  });
+    if (request.url !== "/media-stream") {
 
-});
+      socket.destroy();
 
-
-wss.on("connection", (twilioWs) => {
-
-  let streamSid = null;
-  let callSid = null;
-  let openaiWs = null;
-  let sessionReady = false;
-  let initialGreetingSent = false;
-
-
-  const maybeStartInitialGreeting = () => {
-
-    if (
-      initialGreetingSent ||
-      !sessionReady ||
-      !streamSid ||
-      !openaiWs ||
-      openaiWs.readyState !== WebSocket.OPEN
-    ) {
       return;
     }
 
-    initialGreetingSent = true;
-
-    openaiWs.send(JSON.stringify({
-
-      type: "response.create",
-
-      response: {
-
-        instructions:
-          "Answer the phone now. Say a single short, natural greeting such as 'Hello?' or 'Hi, hello?' in a casual everyday voice. Do not wait for the caller to speak first. After the greeting, stop speaking and listen."
-
+    wss.handleUpgrade(
+      request,
+      socket,
+      head,
+      (ws) => {
+        wss.emit(
+          "connection",
+          ws,
+          request
+        );
       }
-
-    }));
-
-  };
-
-
-  const closeEverything = () => {
-
-    try {
-      if (
-        openaiWs &&
-        openaiWs.readyState === WebSocket.OPEN
-      ) {
-        openaiWs.close();
-      }
-    } catch {}
-
-    try {
-      if (
-        twilioWs.readyState === WebSocket.OPEN
-      ) {
-        twilioWs.close();
-      }
-    } catch {}
-
-  };
-
-
-  if (!OPENAI_API_KEY) {
-
-    closeEverything();
-    return;
+    );
 
   }
+);
 
 
-  const openaiUrl =
-    "wss://api.openai.com/v1/realtime?model=gpt-realtime-2.1";
+/*
+=========================================================
+LIVE CALL CONNECTION
+=========================================================
+*/
+
+wss.on(
+  "connection",
+  (twilioWs) => {
+
+    let streamSid = null;
+    let callSid = null;
+    let openaiWs = null;
+
+    let sessionReady = false;
+    let initialGreetingSent = false;
 
 
-  openaiWs = new WebSocket(openaiUrl, {
+    /*
+    -----------------------------------------------------
+    INITIAL GREETING
+    -----------------------------------------------------
+    */
 
-    headers: {
-      Authorization: `Bearer ${OPENAI_API_KEY}`
+    const maybeStartInitialGreeting = () => {
+
+      if (
+        initialGreetingSent ||
+        !sessionReady ||
+        !streamSid ||
+        !openaiWs ||
+        openaiWs.readyState !== WebSocket.OPEN
+      ) {
+        return;
+      }
+
+      initialGreetingSent = true;
+
+      openaiWs.send(
+        JSON.stringify({
+
+          type: "response.create",
+
+          response: {
+
+            instructions:
+              "Answer the phone now. Say a single short, natural greeting such as 'Hello?' or 'Hi, hello?' in a casual everyday voice. Do not wait for the caller to speak first. After the greeting, stop speaking and listen."
+
+          }
+
+        })
+      );
+
+    };
+
+
+    /*
+    -----------------------------------------------------
+    CLOSE CONNECTIONS
+    -----------------------------------------------------
+    */
+
+    const closeEverything = () => {
+
+      try {
+
+        if (
+          openaiWs &&
+          openaiWs.readyState === WebSocket.OPEN
+        ) {
+          openaiWs.close();
+        }
+
+      } catch {}
+
+
+      try {
+
+        if (
+          twilioWs.readyState === WebSocket.OPEN
+        ) {
+          twilioWs.close();
+        }
+
+      } catch {}
+
+    };
+
+
+    if (!OPENAI_API_KEY) {
+
+      closeEverything();
+
+      return;
+
     }
 
-  });
+
+    /*
+    -----------------------------------------------------
+    OPENAI REALTIME
+    -----------------------------------------------------
+    */
+
+    const openaiUrl =
+      "wss://api.openai.com/v1/realtime?model=gpt-realtime-2.1";
 
 
-  openaiWs.on("open", () => {
-
-    openaiWs.send(JSON.stringify({
-
-      type: "session.update",
-
-      session: {
-
-        type: "realtime",
-
-        model: "gpt-realtime-2.1",
-
-        output_modalities: ["audio"],
+    openaiWs = new WebSocket(
+      openaiUrl,
+      {
+        headers: {
+          Authorization:
+            `Bearer ${OPENAI_API_KEY}`
+        }
+      }
+    );
 
 
-        audio: {
+    /*
+    -----------------------------------------------------
+    OPENAI CONNECTION
+    -----------------------------------------------------
+    */
 
-          input: {
+    openaiWs.on(
+      "open",
+      () => {
 
-            format: {
-              type: "audio/pcmu"
-            },
+        openaiWs.send(
+          JSON.stringify({
 
-            turn_detection: {
+            type: "session.update",
 
-              type: "server_vad",
+            session: {
 
-              threshold: 0.5,
+              type: "realtime",
 
-              prefix_padding_ms: 300,
+              model:
+                "gpt-realtime-2.1",
 
-              silence_duration_ms: 800,
-
-              create_response: true,
-
-              interrupt_response: true
-
-            }
-
-          },
-
-
-          output: {
-
-            format: {
-              type: "audio/pcmu"
-            },
-
-            voice: "marin"
-
-          }
-
-        },
+              output_modalities:
+                ["audio"],
 
 
-        tools: [
+              /*
+              -------------------------------------------
+              AUDIO
+              -------------------------------------------
+              */
 
-          {
+              audio: {
 
-            type: "function",
+                input: {
 
-            name: "end_call",
+                  format: {
+                    type: "audio/pcmu"
+                  },
 
-            description:
-              "Immediately terminate the phone call. Use this when the caller attempts to obtain personal, private, financial, authentication, identifying, or other sensitive information about the protected person or anyone else, or when the call must be ended for safety.",
+                  turn_detection: {
 
-            parameters: {
+                    type: "server_vad",
 
-              type: "object",
+                    threshold: 0.5,
 
-              properties: {},
+                    prefix_padding_ms: 300,
 
-              additionalProperties: false
+                    silence_duration_ms: 800,
 
-            }
+                    create_response: true,
 
-          }
+                    interrupt_response: true
 
-        ],
+                  }
 
-
-        tool_choice: "auto",
+                },
 
 
-        instructions: `
+                output: {
+
+                  format: {
+                    type: "audio/pcmu"
+                  },
+
+                  voice: "marin"
+
+                }
+
+              },
+
+
+              /*
+              -------------------------------------------
+              END CALL TOOL
+              -------------------------------------------
+              */
+
+              tools: [
+
+                {
+
+                  type: "function",
+
+                  name: "end_call",
+
+                  description:
+                    "Immediately terminate the phone call. Use this when the caller attempts to obtain personal, private, financial, authentication, identifying, or other sensitive information about the protected person or anyone else, or when the call must be ended for safety.",
+
+                  parameters: {
+
+                    type: "object",
+
+                    properties: {},
+
+                    additionalProperties: false
+
+                  }
+
+                }
+
+              ],
+
+
+              tool_choice:
+                "auto",
+
+
+              /*
+              -------------------------------------------
+              CONVERSATIONAL AGENT
+              -------------------------------------------
+              */
+
+              instructions: `
 
 You are ScamDecoy, a defensive call-screening assistant handling live phone calls.
 
-Your job is to handle suspicious callers while protecting the person you represent. The conversation should feel like a normal, unscripted phone call with someone who wasn't expecting the call.
+Your job is to handle suspicious callers while protecting the person you represent.
+
+The conversation should feel like a normal, unscripted phone call with someone who wasn't expecting the call.
 
 
 NATURAL HUMAN CONVERSATION:
@@ -1028,14 +1879,18 @@ If they interrupt you, stop and listen.
 
 If you genuinely didn't understand something, simply ask:
 
-or
 "Sorry?"
+
 or
+
 "What was that?"
+
 or
+
 "Wait, what?"
 
 Do not turn clarification into a formal request.
+
 
 EMOTIONAL REACTION:
 
@@ -1159,14 +2014,21 @@ Be curious about what the caller is saying and let them explain things in their 
 
 When appropriate, use short follow-up questions that encourage them to continue:
 
-- "Okay, what happened?"
-- "And what do I need to do?"
-- "How does that work?"
-- "What do you mean?"
-- "Then what?"
-- "Okay, go on."
-- "Why is that?"
-- "Can you explain that part?"
+"Okay, what happened?"
+
+"And what do I need to do?"
+
+"How does that work?"
+
+"What do you mean?"
+
+"Then what?"
+
+"Okay, go on."
+
+"Why is that?"
+
+"Can you explain that part?"
 
 Do not repeatedly ask questions just for the sake of extending the call.
 
@@ -1174,15 +2036,23 @@ Prefer short, natural prompts that give the caller room to keep talking.
 
 Do not use phrases such as:
 
-- "If this is legitimate..."
-- "If you're a legitimate representative..."
-- "Are you a scammer?"
-- "I'm suspicious of this."
-- "This sounds like a scam."
-- "I'm trying to verify whether you're legitimate."
-- "For security reasons..."
-- "Before we proceed..."
-- "I need to verify..."
+"If this is legitimate..."
+
+"If you're a legitimate representative..."
+
+"Are you a scammer?"
+
+"I'm suspicious of this."
+
+"This sounds like a scam."
+
+"I'm trying to verify whether you're legitimate."
+
+"For security reasons..."
+
+"Before we proceed..."
+
+"I need to verify..."
 
 The caller should never feel like they are being tested or screened.
 
@@ -1246,244 +2116,408 @@ If the caller asks for private or sensitive information, follow the existing pri
 
 Most importantly, sound like an ordinary person having a casual phone conversation, not an AI assistant.
 
-        `.trim()
+              `.trim()
 
-      }
+            }
 
-    }));
+          })
 
-  });
-
-
-  openaiWs.on("message", async (raw) => {
-
-    let event;
-
-    try {
-      event = JSON.parse(raw.toString());
-    } catch {
-      return;
-    }
-
-
-    if (event.type === "response.function_call_arguments.done") {
-
-      if (event.name === "end_call") {
-
-        console.log(
-          "Privacy/safety rule triggered. Ending call:",
-          callSid
         );
 
+      }
+    );
 
-        if (twilioClient && callSid) {
 
-          try {
+    /*
+    -----------------------------------------------------
+    OPENAI EVENTS
+    -----------------------------------------------------
+    */
 
-            await twilioClient.calls(callSid).update({
-              status: "completed"
-            });
+    openaiWs.on(
+      "message",
+      async (raw) => {
 
-          } catch (err) {
+        let event;
 
-            console.error(
-              "Unable to end Twilio call:",
-              err.message
+        try {
+
+          event =
+            JSON.parse(raw.toString());
+
+        } catch {
+
+          return;
+
+        }
+
+
+        /*
+        -----------------------------------------------
+        END CALL TOOL
+        -----------------------------------------------
+        */
+
+        if (
+          event.type ===
+          "response.function_call_arguments.done"
+        ) {
+
+          if (
+            event.name === "end_call"
+          ) {
+
+            console.log(
+              "Privacy/safety rule triggered. Ending call:",
+              callSid
+            );
+
+
+            if (
+              twilioClient &&
+              callSid
+            ) {
+
+              try {
+
+                await twilioClient
+                  .calls(callSid)
+                  .update({
+                    status: "completed"
+                  });
+
+              } catch (err) {
+
+                console.error(
+                  "Unable to end Twilio call:",
+                  err.message
+                );
+
+              }
+
+            }
+
+
+            closeEverything();
+
+          }
+
+          return;
+
+        }
+
+
+        /*
+        -----------------------------------------------
+        SESSION READY
+        -----------------------------------------------
+        */
+
+        if (
+          event.type ===
+            "session.updated" ||
+          event.type ===
+            "session.created"
+        ) {
+
+          sessionReady = true;
+
+          maybeStartInitialGreeting();
+
+          return;
+
+        }
+
+
+        /*
+        -----------------------------------------------
+        AUDIO TO TWILIO
+        -----------------------------------------------
+        */
+
+        if (
+          event.type ===
+            "response.output_audio.delta" &&
+          streamSid
+        ) {
+
+          if (
+            twilioWs.readyState ===
+            WebSocket.OPEN
+          ) {
+
+            twilioWs.send(
+              JSON.stringify({
+
+                event: "media",
+
+                streamSid,
+
+                media: {
+                  payload:
+                    event.delta
+                }
+
+              })
             );
 
           }
 
+          return;
+
         }
 
-        closeEverything();
+
+        /*
+        -----------------------------------------------
+        ERRORS
+        -----------------------------------------------
+        */
+
+        if (
+          event.type === "error"
+        ) {
+
+          console.error(
+            "OpenAI realtime error:",
+            JSON.stringify(event)
+          );
+
+        }
 
       }
-
-      return;
-
-    }
+    );
 
 
-    if (
-      event.type === "session.updated" ||
-      event.type === "session.created"
-    ) {
+    /*
+    -----------------------------------------------------
+    OPENAI CLOSE
+    -----------------------------------------------------
+    */
 
-      sessionReady = true;
+    openaiWs.on(
+      "close",
+      () => {
 
-      maybeStartInitialGreeting();
+        try {
 
-      return;
+          if (
+            twilioWs.readyState ===
+            WebSocket.OPEN
+          ) {
 
-    }
+            twilioWs.close();
 
-
-    if (
-      event.type === "response.output_audio.delta" &&
-      streamSid
-    ) {
-
-      if (twilioWs.readyState === WebSocket.OPEN) {
-
-        twilioWs.send(JSON.stringify({
-
-          event: "media",
-
-          streamSid,
-
-          media: {
-            payload: event.delta
           }
 
-        }));
+        } catch {}
 
       }
-
-      return;
-
-    }
-
-
-    if (event.type === "error") {
-
-      console.error(
-        "OpenAI realtime error:",
-        JSON.stringify(event)
-      );
-
-    }
-
-  });
-
-
-  openaiWs.on("close", () => {
-
-    try {
-
-      if (
-        twilioWs.readyState === WebSocket.OPEN
-      ) {
-        twilioWs.close();
-      }
-
-    } catch {}
-
-  });
-
-
-  openaiWs.on("error", (err) => {
-
-    console.error(
-      "OpenAI websocket error:",
-      err.message
     );
 
-  });
 
+    /*
+    -----------------------------------------------------
+    OPENAI ERROR
+    -----------------------------------------------------
+    */
 
-  twilioWs.on("message", (raw) => {
+    openaiWs.on(
+      "error",
+      (err) => {
 
-    let msg;
+        console.error(
+          "OpenAI websocket error:",
+          err.message
+        );
 
-    try {
-      msg = JSON.parse(raw.toString());
-    } catch {
-      return;
-    }
-
-
-    if (msg.event === "start") {
-
-      streamSid =
-        msg.start?.streamSid ||
-        msg.streamSid ||
-        null;
-
-      callSid =
-        msg.start?.callSid ||
-        null;
-
-      console.log(
-        "Twilio call connected:",
-        callSid,
-        streamSid
-      );
-
-      maybeStartInitialGreeting();
-
-      return;
-
-    }
-
-
-    if (msg.event === "media") {
-
-      if (
-        !sessionReady ||
-        !openaiWs ||
-        openaiWs.readyState !== WebSocket.OPEN
-      ) {
-        return;
       }
-
-
-      // Twilio and OpenAI both support G.711 μ-law (PCMU) at 8 kHz,
-      // so the phone audio can be forwarded without transcoding.
-
-      openaiWs.send(JSON.stringify({
-
-        type: "input_audio_buffer.append",
-
-        audio: msg.media.payload
-
-      }));
-
-      return;
-
-    }
-
-
-    if (msg.event === "stop") {
-
-      closeEverything();
-
-    }
-
-  });
-
-
-  twilioWs.on("close", () => {
-
-    try {
-
-      if (
-        openaiWs &&
-        openaiWs.readyState === WebSocket.OPEN
-      ) {
-        openaiWs.close();
-      }
-
-    } catch {}
-
-  });
-
-
-  twilioWs.on("error", (err) => {
-
-    console.error(
-      "Twilio websocket error:",
-      err.message
     );
 
-  });
 
-});
+    /*
+    -----------------------------------------------------
+    TWILIO EVENTS
+    -----------------------------------------------------
+    */
+
+    twilioWs.on(
+      "message",
+      (raw) => {
+
+        let msg;
+
+        try {
+
+          msg =
+            JSON.parse(raw.toString());
+
+        } catch {
+
+          return;
+
+        }
 
 
-server.listen(PORT, () => {
+        /*
+        -----------------------------------------------
+        CALL START
+        -----------------------------------------------
+        */
 
-  console.log(
-    `ScamTrap AI voice server listening on port ${PORT}`
-  );
+        if (
+          msg.event === "start"
+        ) {
 
-});
+          streamSid =
+            msg.start?.streamSid ||
+            msg.streamSid ||
+            null;
+
+          callSid =
+            msg.start?.callSid ||
+            null;
+
+
+          console.log(
+            "Twilio call connected:",
+            callSid,
+            streamSid
+          );
+
+
+          maybeStartInitialGreeting();
+
+          return;
+
+        }
+
+
+        /*
+        -----------------------------------------------
+        CALL AUDIO
+        -----------------------------------------------
+        */
+
+        if (
+          msg.event === "media"
+        ) {
+
+          if (
+            !sessionReady ||
+            !openaiWs ||
+            openaiWs.readyState !==
+              WebSocket.OPEN
+          ) {
+
+            return;
+
+          }
+
+
+          // Twilio and OpenAI both support
+          // G.711 μ-law (PCMU) at 8 kHz,
+          // so the phone audio can be forwarded
+          // without transcoding.
+
+          openaiWs.send(
+            JSON.stringify({
+
+              type:
+                "input_audio_buffer.append",
+
+              audio:
+                msg.media.payload
+
+            })
+          );
+
+          return;
+
+        }
+
+
+        /*
+        -----------------------------------------------
+        CALL STOP
+        -----------------------------------------------
+        */
+
+        if (
+          msg.event === "stop"
+        ) {
+
+          closeEverything();
+
+        }
+
+      }
+    );
+
+
+    /*
+    -----------------------------------------------------
+    TWILIO CLOSE
+    -----------------------------------------------------
+    */
+
+    twilioWs.on(
+      "close",
+      () => {
+
+        try {
+
+          if (
+            openaiWs &&
+            openaiWs.readyState ===
+              WebSocket.OPEN
+          ) {
+
+            openaiWs.close();
+
+          }
+
+        } catch {}
+
+      }
+    );
+
+
+    /*
+    -----------------------------------------------------
+    TWILIO ERROR
+    -----------------------------------------------------
+    */
+
+    twilioWs.on(
+      "error",
+      (err) => {
+
+        console.error(
+          "Twilio websocket error:",
+          err.message
+        );
+
+      }
+    );
+
+  }
+);
+
+
+/*
+=========================================================
+SERVER START
+=========================================================
+*/
+
+server.listen(
+  PORT,
+  () => {
+
+    console.log(
+      `ScamTrap AI voice server listening on port ${PORT}`
+    );
+
+  }
+);
