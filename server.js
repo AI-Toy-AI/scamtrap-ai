@@ -1,29 +1,53 @@
 import "dotenv/config";
+
 import express from "express";
 import http from "http";
 import twilio from "twilio";
 import { WebSocketServer, WebSocket } from "ws";
 
 const app = express();
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 const server = http.createServer(app);
-const wss = new WebSocketServer({ noServer: true });
 
-const PORT = Number(process.env.PORT || 10000);
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const PUBLIC_BASE_URL = process.env.PUBLIC_BASE_URL || "";
-const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID;
-const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN;
+const wss = new WebSocketServer({
+  noServer: true
+});
+
+
+const PORT = Number(
+  process.env.PORT || 10000
+);
+
+const OPENAI_API_KEY =
+  process.env.OPENAI_API_KEY;
+
+const PUBLIC_BASE_URL =
+  process.env.PUBLIC_BASE_URL || "";
+
+const TWILIO_ACCOUNT_SID =
+  process.env.TWILIO_ACCOUNT_SID;
+
+const TWILIO_AUTH_TOKEN =
+  process.env.TWILIO_AUTH_TOKEN;
+
 
 const twilioClient =
-  TWILIO_ACCOUNT_SID && TWILIO_AUTH_TOKEN
-    ? twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+  TWILIO_ACCOUNT_SID &&
+  TWILIO_AUTH_TOKEN
+    ? twilio(
+        TWILIO_ACCOUNT_SID,
+        TWILIO_AUTH_TOKEN
+      )
     : null;
 
+
 if (!OPENAI_API_KEY) {
-  console.warn("OPENAI_API_KEY is not set.");
+  console.warn(
+    "OPENAI_API_KEY is not set."
+  );
 }
 
 
@@ -34,8 +58,10 @@ SCAMDECOY WEBSITE
 */
 
 app.get("/", (_req, res) => {
+
   res.send(`<!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="UTF-8">
@@ -66,6 +92,7 @@ app.get("/", (_req, res) => {
 
     body {
       margin: 0;
+
       font-family:
         Inter,
         ui-sans-serif,
@@ -84,6 +111,7 @@ app.get("/", (_req, res) => {
         );
 
       color: #f5f7fa;
+
       line-height: 1.6;
     }
 
@@ -101,18 +129,30 @@ app.get("/", (_req, res) => {
       margin: auto;
     }
 
+
+    /*
+    =====================================================
+    NAVIGATION
+    =====================================================
+    */
+
     nav {
       display: flex;
+
       justify-content: space-between;
       align-items: center;
+
       padding: 25px 0;
+
       position: relative;
       z-index: 10;
     }
 
     .logo {
       font-size: 1.45rem;
+
       font-weight: 900;
+
       letter-spacing: -0.5px;
     }
 
@@ -127,7 +167,9 @@ app.get("/", (_req, res) => {
 
     .nav-links a {
       color: #aab5c4;
+
       text-decoration: none;
+
       font-size: 0.95rem;
     }
 
@@ -136,46 +178,80 @@ app.get("/", (_req, res) => {
     }
 
 
-    /* HERO */
+    /*
+    =====================================================
+    HERO
+    =====================================================
+    */
 
     .hero {
       text-align: center;
+
       padding: 95px 0 90px;
+
       position: relative;
     }
 
     .hero::before {
       content: "";
+
       position: absolute;
+
       width: 500px;
       height: 500px;
+
       border-radius: 50%;
-      background: rgba(101, 230, 160, 0.07);
+
+      background:
+        rgba(101, 230, 160, 0.07);
+
       filter: blur(70px);
+
       left: 50%;
       top: 0;
+
       transform: translateX(-50%);
+
       pointer-events: none;
     }
 
     .badge {
       display: inline-block;
+
       padding: 8px 15px;
+
       border-radius: 999px;
+
       border: 1px solid #29405a;
+
       color: #65e6a0;
-      background: rgba(14, 27, 45, 0.85);
+
+      background:
+        rgba(14, 27, 45, 0.85);
+
       font-size: 13px;
+
       font-weight: 800;
+
       letter-spacing: 0.2px;
+
       position: relative;
     }
 
     h1 {
-      font-size: clamp(3.1rem, 8vw, 6.5rem);
+      font-size:
+        clamp(
+          3.1rem,
+          8vw,
+          6.5rem
+        );
+
       line-height: 0.94;
+
       letter-spacing: -5px;
-      margin: 28px 0 28px;
+
+      margin: 28px 0;
+
       position: relative;
     }
 
@@ -185,24 +261,40 @@ app.get("/", (_req, res) => {
 
     .hero p {
       max-width: 720px;
+
       margin: auto;
+
       color: #aab5c4;
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
+
+      font-size:
+        clamp(
+          1.05rem,
+          2vw,
+          1.25rem
+        );
+
       position: relative;
     }
 
     .buttons {
       margin-top: 34px;
+
       position: relative;
     }
 
     .button {
       display: inline-block;
+
       padding: 14px 23px;
+
       margin: 6px;
+
       border-radius: 11px;
+
       text-decoration: none;
+
       font-weight: 800;
+
       transition:
         transform 0.2s ease,
         opacity 0.2s ease;
@@ -214,59 +306,93 @@ app.get("/", (_req, res) => {
 
     .primary {
       background: #65e6a0;
+
       color: #06130c;
     }
 
     .secondary {
       background: #122238;
+
       color: #ffffff;
-      border: 1px solid #29405a;
+
+      border:
+        1px solid #29405a;
     }
 
 
-    /* CALL VISUAL */
+    /*
+    =====================================================
+    CALL VISUAL
+    =====================================================
+    */
 
     .call-visual {
       max-width: 760px;
+
       margin: 35px auto 0;
+
       padding: 22px;
+
       border-radius: 20px;
-      background: rgba(10, 22, 38, 0.85);
-      border: 1px solid #20344b;
+
+      background:
+        rgba(10, 22, 38, 0.85);
+
+      border:
+        1px solid #20344b;
+
       box-shadow:
-        0 25px 80px rgba(0, 0, 0, 0.28);
+        0 25px 80px
+        rgba(0, 0, 0, 0.28);
     }
 
     .call-line {
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       gap: 13px;
+
       flex-wrap: wrap;
+
       color: #dce4ee;
+
       font-weight: 800;
     }
 
     .call-pill {
       padding: 10px 15px;
+
       border-radius: 999px;
+
       background: #122238;
-      border: 1px solid #29405a;
+
+      border:
+        1px solid #29405a;
     }
 
     .call-arrow {
       color: #65e6a0;
+
       font-size: 1.25rem;
     }
 
     .call-caption {
       margin-top: 13px;
+
       color: #718096;
+
       font-size: 0.88rem;
     }
 
 
-    /* GENERAL SECTIONS */
+    /*
+    =====================================================
+    GENERAL SECTIONS
+    =====================================================
+    */
 
     section {
       padding: 85px 0;
@@ -274,52 +400,84 @@ app.get("/", (_req, res) => {
 
     .section-title {
       text-align: center;
+
       margin-bottom: 45px;
     }
 
     .eyebrow {
       color: #65e6a0;
+
       font-size: 0.78rem;
+
       font-weight: 900;
+
       text-transform: uppercase;
+
       letter-spacing: 1.5px;
+
       margin-bottom: 9px;
     }
 
     .section-title h2 {
-      font-size: clamp(2.1rem, 5vw, 3.4rem);
+      font-size:
+        clamp(
+          2.1rem,
+          5vw,
+          3.4rem
+        );
+
       line-height: 1.05;
+
       letter-spacing: -2px;
-      margin: 0 0 15px;
+
+      margin:
+        0 0 15px;
     }
 
     .section-title p {
       color: #aab5c4;
+
       max-width: 720px;
+
       margin: auto;
+
       font-size: 1.05rem;
     }
 
 
-    /* DIFFERENT */
+    /*
+    =====================================================
+    DIFFERENCE
+    =====================================================
+    */
 
     .difference {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+
+      grid-template-columns:
+        1fr 1fr;
+
       gap: 20px;
+
       max-width: 900px;
+
       margin: auto;
     }
 
     .difference-card {
       padding: 30px;
+
       border-radius: 20px;
-      border: 1px solid #1c2b40;
+
+      border:
+        1px solid #1c2b40;
+
       background: #0b1728;
     }
 
     .difference-card.featured {
       border-color: #315c49;
+
       background:
         linear-gradient(
           145deg,
@@ -330,6 +488,7 @@ app.get("/", (_req, res) => {
 
     .difference-card h3 {
       margin-top: 0;
+
       font-size: 1.35rem;
     }
 
@@ -339,92 +498,138 @@ app.get("/", (_req, res) => {
 
     .difference-list {
       padding: 0;
+
       margin: 22px 0 0;
+
       list-style: none;
     }
 
     .difference-list li {
       margin: 13px 0;
+
       color: #c9d2de;
     }
 
     .difference-list li::before {
       content: "✓";
+
       color: #65e6a0;
+
       font-weight: 900;
+
       margin-right: 9px;
     }
 
     .difference-card:not(.featured)
     .difference-list li::before {
       content: "•";
+
       color: #718096;
     }
 
 
-    /* CARDS */
+    /*
+    =====================================================
+    CARDS
+    =====================================================
+    */
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
       gap: 18px;
     }
 
     .card {
       background: #0e1b2d;
-      border: 1px solid #1c2b40;
+
+      border:
+        1px solid #1c2b40;
+
       border-radius: 18px;
+
       padding: 28px;
     }
 
     .card-icon {
       width: 42px;
       height: 42px;
+
       display: grid;
+
       place-items: center;
+
       border-radius: 12px;
+
       background: #173b2a;
+
       color: #65e6a0;
+
       font-weight: 900;
+
       margin-bottom: 18px;
     }
 
     .card h3 {
       margin-top: 0;
+
       font-size: 1.2rem;
     }
 
     .card p {
       color: #aab5c4;
+
       margin-bottom: 0;
     }
 
 
-    /* HOW IT WORKS */
+    /*
+    =====================================================
+    HOW IT WORKS
+    =====================================================
+    */
 
     .steps {
       max-width: 850px;
+
       margin: auto;
     }
 
     .step {
       display: flex;
+
       gap: 18px;
+
       padding: 22px;
+
       margin-bottom: 13px;
+
       background: #0e1b2d;
-      border: 1px solid #1c2b40;
+
+      border:
+        1px solid #1c2b40;
+
       border-radius: 16px;
     }
 
     .number {
       min-width: 42px;
+
       height: 42px;
+
       display: grid;
+
       place-items: center;
+
       border-radius: 50%;
+
       background: #173b2a;
+
       color: #65e6a0;
+
       font-weight: 900;
     }
 
@@ -434,82 +639,323 @@ app.get("/", (_req, res) => {
 
     .step p {
       margin: 0;
+
       color: #aab5c4;
     }
 
 
-    /* CONVERSATION */
+    /*
+    =====================================================
+    CONVERSATION
+    =====================================================
+    */
 
     .conversation {
       max-width: 760px;
+
       margin: auto;
+
       padding: 28px;
+
       background: #0a1626;
-      border: 1px solid #1c2b40;
+
+      border:
+        1px solid #1c2b40;
+
       border-radius: 20px;
     }
 
     .conversation-label {
       color: #718096;
+
       text-transform: uppercase;
+
       font-size: 0.72rem;
+
       letter-spacing: 1.3px;
+
       font-weight: 900;
+
       margin-bottom: 20px;
     }
 
     .bubble {
       padding: 14px 17px;
+
       border-radius: 16px;
+
       margin: 12px 0;
+
       max-width: 82%;
     }
 
     .caller {
       background: #17273c;
+
       margin-right: auto;
+
       color: #dce4ee;
     }
 
     .decoy {
       background: #173b2a;
+
       margin-left: auto;
+
       color: #e9fff2;
     }
 
     .bubble strong {
       display: block;
+
       font-size: 0.72rem;
+
       text-transform: uppercase;
+
       letter-spacing: 0.8px;
+
       margin-bottom: 4px;
+
       opacity: 0.7;
     }
 
 
-    /* MOBILE */
+    /*
+    =====================================================
+    TEXT FEATURE
+    =====================================================
+    */
+
+    .future-feature {
+      max-width: 900px;
+
+      margin: 0 auto;
+
+      padding: 35px;
+
+      border-radius: 22px;
+
+      border:
+        1px solid #315c49;
+
+      background:
+        linear-gradient(
+          145deg,
+          #102a21,
+          #0b1728
+        );
+
+      text-align: center;
+    }
+
+    .future-icon {
+      width: 58px;
+      height: 58px;
+
+      display: grid;
+
+      place-items: center;
+
+      margin: 0 auto 18px;
+
+      border-radius: 16px;
+
+      background: #173b2a;
+
+      color: #65e6a0;
+
+      font-size: 1.5rem;
+
+      font-weight: 900;
+    }
+
+    .future-feature h3 {
+      font-size: 1.6rem;
+
+      margin:
+        0 0 10px;
+    }
+
+    .future-feature p {
+      max-width: 700px;
+
+      margin: auto;
+
+      color: #aab5c4;
+    }
+
+    .future-label {
+      display: inline-block;
+
+      margin-top: 20px;
+
+      padding: 8px 14px;
+
+      border-radius: 999px;
+
+      background: #173b2a;
+
+      border:
+        1px solid #315c49;
+
+      color: #65e6a0;
+
+      font-size: 0.8rem;
+
+      font-weight: 900;
+    }
+
+
+    /*
+    =====================================================
+    MOBILE
+    =====================================================
+    */
 
     .mobile-card {
       position: relative;
+
       overflow: hidden;
     }
 
     .coming {
       display: inline-block;
+
       margin-top: 17px;
+
       padding: 7px 12px;
+
       border-radius: 999px;
-      border: 1px solid #29405a;
+
+      border:
+        1px solid #29405a;
+
       color: #aab5c4;
+
       font-size: 0.78rem;
+
       font-weight: 800;
     }
 
 
-    /* CTA */
+    /*
+    =====================================================
+    FREE TRIAL
+    =====================================================
+    */
+
+    .trial {
+      max-width: 850px;
+
+      margin: auto;
+
+      padding: 30px;
+
+      text-align: center;
+
+      border-radius: 20px;
+
+      border:
+        1px solid #315c49;
+
+      background:
+        rgba(16, 42, 33, 0.55);
+    }
+
+    .trial h3 {
+      margin:
+        0 0 8px;
+
+      font-size: 1.55rem;
+    }
+
+    .trial p {
+      color: #aab5c4;
+
+      margin: 0;
+    }
+
+    .trial-badge {
+      display: inline-block;
+
+      margin-bottom: 13px;
+
+      padding: 8px 14px;
+
+      border-radius: 999px;
+
+      background: #65e6a0;
+
+      color: #06130c;
+
+      font-size: 0.8rem;
+
+      font-weight: 900;
+    }
+
+
+    /*
+    =====================================================
+    PARENTS TRIBUTE
+    =====================================================
+    */
+
+    .tribute {
+      max-width: 760px;
+
+      margin: auto;
+
+      padding: 38px 30px;
+
+      text-align: center;
+
+      border-top:
+        1px solid #24364c;
+
+      border-bottom:
+        1px solid #24364c;
+    }
+
+    .tribute-mark {
+      color: #65e6a0;
+
+      font-size: 1.4rem;
+
+      margin-bottom: 12px;
+    }
+
+    .tribute h2 {
+      margin:
+        0 0 13px;
+
+      font-size:
+        clamp(
+          1.7rem,
+          4vw,
+          2.4rem
+        );
+
+      letter-spacing: -1px;
+    }
+
+    .tribute p {
+      color: #aab5c4;
+
+      margin: auto;
+
+      max-width: 650px;
+    }
+
+
+    /*
+    =====================================================
+    CTA
+    =====================================================
+    */
 
     .cta {
       text-align: center;
+
       background:
         radial-gradient(
           circle at center,
@@ -517,39 +963,74 @@ app.get("/", (_req, res) => {
           #0e1b2d 55%,
           #0b1524 100%
         );
-      border: 1px solid #315c49;
+
+      border:
+        1px solid #315c49;
+
       border-radius: 24px;
+
       padding: 65px 25px;
+
       margin: 75px 0;
     }
 
     .cta h2 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size:
+        clamp(
+          2rem,
+          5vw,
+          3.5rem
+        );
+
       line-height: 1.05;
+
       letter-spacing: -2px;
+
       margin: 0 0 15px;
     }
 
     .cta p {
       color: #aab5c4;
+
       max-width: 680px;
-      margin: 10px auto 25px;
+
+      margin:
+        10px auto 25px;
     }
 
 
+    /*
+    =====================================================
+    FOOTER
+    =====================================================
+    */
+
     footer {
       text-align: center;
+
       color: #718096;
-      padding: 35px 0 45px;
-      border-top: 1px solid #182638;
+
+      padding:
+        35px 0 45px;
+
+      border-top:
+        1px solid #182638;
+
       font-size: 0.9rem;
     }
 
     .footer-name {
       color: #aab5c4;
+
       font-weight: 800;
     }
 
+
+    /*
+    =====================================================
+    RESPONSIVE
+    =====================================================
+    */
 
     @media (max-width: 800px) {
 
@@ -587,7 +1068,13 @@ app.get("/", (_req, res) => {
       }
 
       h1 {
-        font-size: clamp(3rem, 15vw, 4.6rem);
+        font-size:
+          clamp(
+            3rem,
+            15vw,
+            4.6rem
+          );
+
         letter-spacing: -3px;
       }
 
@@ -596,7 +1083,8 @@ app.get("/", (_req, res) => {
       }
 
       .call-arrow {
-        transform: rotate(90deg);
+        transform:
+          rotate(90deg);
       }
 
       .bubble {
@@ -628,9 +1116,19 @@ app.get("/", (_req, res) => {
     </div>
 
     <div class="nav-links">
-      <a href="#why">Why ScamDecoy</a>
-      <a href="#how">How it works</a>
-      <a href="#mobile">Mobile</a>
+
+      <a href="#why">
+        Why ScamDecoy
+      </a>
+
+      <a href="#how">
+        How it works
+      </a>
+
+      <a href="#future">
+        What's next
+      </a>
+
     </div>
 
   </nav>
@@ -649,12 +1147,16 @@ app.get("/", (_req, res) => {
 
       <h1>
         Scammers called<br>
-        the <span class="hero-highlight">wrong number.</span>
+        the
+        <span class="hero-highlight">
+          wrong number.
+        </span>
       </h1>
 
       <p>
-        ScamDecoy answers suspicious calls, talks naturally,
-        and keeps the conversation away from you.
+        ScamDecoy answers suspicious calls,
+        talks naturally, and keeps the conversation
+        away from you.
       </p>
 
       <div class="buttons">
@@ -668,9 +1170,9 @@ app.get("/", (_req, res) => {
 
         <a
           class="button secondary"
-          href="#why"
+          href="#future"
         >
-          Why ScamDecoy?
+          What's coming next
         </a>
 
       </div>
@@ -703,7 +1205,8 @@ app.get("/", (_req, res) => {
         </div>
 
         <div class="call-caption">
-          Instead of simply blocking the call, ScamDecoy can answer it.
+          Instead of simply blocking the call,
+          ScamDecoy can answer it.
         </div>
 
       </div>
@@ -726,10 +1229,15 @@ app.get("/", (_req, res) => {
         </h2>
 
         <p>
-          Most call protection focuses on identifying, filtering,
-          silencing, or blocking suspicious callers.
+          Most call protection focuses on identifying,
+          filtering, silencing, or blocking suspicious
+          callers.
+
           ScamDecoy takes a different approach:
-          <strong>give the caller someone else to talk to.</strong>
+
+          <strong>
+            give the caller someone else to talk to.
+          </strong>
         </p>
 
       </div>
@@ -745,8 +1253,8 @@ app.get("/", (_req, res) => {
           </h3>
 
           <p>
-            The goal is usually to keep suspicious calls
-            away from you.
+            The goal is usually to keep suspicious
+            calls away from you.
           </p>
 
           <ul class="difference-list">
@@ -810,7 +1318,7 @@ app.get("/", (_req, res) => {
     </section>
 
 
-    <!-- CORE FEATURES -->
+    <!-- FEATURES -->
 
     <section>
 
@@ -845,9 +1353,9 @@ app.get("/", (_req, res) => {
           </h3>
 
           <p>
-            Short, casual responses designed to feel more
-            like a normal phone conversation than a scripted
-            automated system.
+            Short, casual responses designed to feel
+            more like a normal phone conversation than
+            a scripted automated system.
           </p>
 
         </div>
@@ -865,8 +1373,8 @@ app.get("/", (_req, res) => {
 
           <p>
             The caller does most of the talking.
-            ScamDecoy listens, reacts, and gives them room
-            to explain what they want.
+            ScamDecoy listens, reacts, and gives them
+            room to explain what they want.
           </p>
 
         </div>
@@ -883,9 +1391,9 @@ app.get("/", (_req, res) => {
           </h3>
 
           <p>
-            ScamDecoy is designed not to provide passwords,
-            verification codes, financial credentials,
-            or other protected information.
+            ScamDecoy is designed not to provide
+            passwords, verification codes, financial
+            credentials, or other protected information.
           </p>
 
         </div>
@@ -934,7 +1442,8 @@ app.get("/", (_req, res) => {
             </h3>
 
             <p>
-              The call is routed through the ScamTrap phone number.
+              The call is routed through the ScamDecoy
+              phone number.
             </p>
 
           </div>
@@ -955,8 +1464,8 @@ app.get("/", (_req, res) => {
             </h3>
 
             <p>
-              A natural voice answers like someone who simply
-              picked up their phone.
+              A natural voice answers like someone
+              who simply picked up their phone.
             </p>
 
           </div>
@@ -977,8 +1486,8 @@ app.get("/", (_req, res) => {
             </h3>
 
             <p>
-              ScamDecoy lets the caller explain who they are
-              and why they're calling.
+              ScamDecoy lets the caller explain who
+              they are and why they're calling.
             </p>
 
           </div>
@@ -999,8 +1508,8 @@ app.get("/", (_req, res) => {
             </h3>
 
             <p>
-              Short, natural responses give the caller room
-              to keep talking without feeling interrogated.
+              Short, natural responses give the caller
+              room to keep talking without feeling interrogated.
             </p>
 
           </div>
@@ -1021,9 +1530,10 @@ app.get("/", (_req, res) => {
             </h3>
 
             <p>
-              ScamDecoy does not provide protected credentials
-              or private information and can terminate the call
-              when sensitive information is targeted.
+              ScamDecoy does not provide protected
+              credentials or private information and
+              can terminate the call when sensitive
+              information is targeted.
             </p>
 
           </div>
@@ -1136,14 +1646,65 @@ app.get("/", (_req, res) => {
     </section>
 
 
-    <!-- MOBILE -->
+    <!-- FUTURE TEXT FEATURE -->
 
-    <section id="mobile">
+    <section id="future">
 
       <div class="section-title">
 
         <div class="eyebrow">
-          Coming next
+          What's next
+        </div>
+
+        <h2>
+          Calls first. Texts are coming.
+        </h2>
+
+        <p>
+          ScamDecoy is starting with phone calls,
+          with text-message protection planned as
+          one of the next major features.
+        </p>
+
+      </div>
+
+
+      <div class="future-feature">
+
+        <div class="future-icon">
+          💬
+        </div>
+
+        <h3>
+          ScamDecoy Text Protection
+        </h3>
+
+        <p>
+          Scam messages are becoming another major way
+          people are targeted. Our next phase will expand
+          ScamDecoy beyond phone calls to help identify
+          suspicious texts, explain why they look dangerous,
+          and help users know what to do before they respond
+          or click.
+        </p>
+
+        <div class="future-label">
+          Coming in the near future
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- MOBILE -->
+
+    <section>
+
+      <div class="section-title">
+
+        <div class="eyebrow">
+          More ways to protect you
         </div>
 
         <h2>
@@ -1152,7 +1713,7 @@ app.get("/", (_req, res) => {
 
         <p>
           Dedicated mobile applications are currently
-          in development and will be added here when they're ready.
+          in development and will be added here when ready.
         </p>
 
       </div>
@@ -1173,7 +1734,7 @@ app.get("/", (_req, res) => {
 
           <p>
             Bring ScamDecoy directly to your Apple devices.
-            We'll add the App Store download here when the
+            The App Store download will be added when the
             application is available.
           </p>
 
@@ -1196,7 +1757,7 @@ app.get("/", (_req, res) => {
 
           <p>
             Bring ScamDecoy directly to your Android phone.
-            We'll add the Google Play download here when the
+            The Google Play download will be added when the
             application is available.
           </p>
 
@@ -1214,13 +1775,13 @@ app.get("/", (_req, res) => {
           </div>
 
           <h3>
-            More protection
+            Text protection
           </h3>
 
           <p>
-            ScamDecoy is being built with room to grow.
-            Future versions can expand how suspicious calls
-            are handled and protected.
+            The next step is expanding ScamDecoy beyond
+            calls to help protect you from suspicious
+            messages too.
           </p>
 
           <span class="coming">
@@ -1235,7 +1796,60 @@ app.get("/", (_req, res) => {
     </section>
 
 
-    <!-- BRAND STATEMENT -->
+    <!-- FIRST MONTH FREE -->
+
+    <section>
+
+      <div class="trial">
+
+        <div class="trial-badge">
+          FIRST MONTH FREE AT LAUNCH
+        </div>
+
+        <h3>
+          Be among the first to try ScamDecoy.
+        </h3>
+
+        <p>
+          We're building ScamDecoy now and preparing
+          for launch. The first month will be free for
+          early customers. Pricing details will be announced
+          when subscriptions are ready.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- PARENTS TRIBUTE -->
+
+    <section>
+
+      <div class="tribute">
+
+        <div class="tribute-mark">
+          ✦
+        </div>
+
+        <h2>
+          Built with the people who believed in me.
+        </h2>
+
+        <p>
+          A quiet thank-you to my parents — for their
+          support, encouragement, and belief in me.
+          One of them is no longer here to see where
+          this journey goes, but their support is still
+          part of it.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- FINAL CTA -->
 
     <section>
 
@@ -1286,7 +1900,9 @@ app.get("/", (_req, res) => {
 </div>
 
 </body>
+
 </html>`);
+
 });
 
 
@@ -1296,14 +1912,17 @@ HEALTH CHECK
 =========================================================
 */
 
-app.get("/health", (_req, res) => {
+app.get(
+  "/health",
+  (_req, res) => {
 
-  res.json({
-    ok: true,
-    service: "scamtrap-ai-voice"
-  });
+    res.json({
+      ok: true,
+      service: "scamtrap-ai-voice"
+    });
 
-});
+  }
+);
 
 
 /*
@@ -1312,30 +1931,48 @@ TWILIO VOICE WEBHOOK
 =========================================================
 */
 
-app.all("/voice", (req, res) => {
+app.all(
+  "/voice",
+  (req, res) => {
 
-  const response = new twilio.twiml.VoiceResponse();
+    const response =
+      new twilio.twiml.VoiceResponse();
 
-  // Let the caller hear roughly 3 rings before the call is answered.
-  response.pause({ length: 2 });
 
-  const host =
-    req.get("host") ||
-    new URL(
-      PUBLIC_BASE_URL || "http://localhost"
-    ).host;
+    // Give the caller roughly two seconds
+    // before the AI answers.
 
-  const connect = response.connect();
+    response.pause({
+      length: 2
+    });
 
-  connect.stream({
-    url: `wss://${host}/media-stream`
-  });
 
-  res
-    .type("text/xml")
-    .send(response.toString());
+    const host =
+      req.get("host") ||
+      new URL(
+        PUBLIC_BASE_URL ||
+        "http://localhost"
+      ).host;
 
-});
+
+    const connect =
+      response.connect();
+
+
+    connect.stream({
+      url:
+        `wss://${host}/media-stream`
+    });
+
+
+    res
+      .type("text/xml")
+      .send(
+        response.toString()
+      );
+
+  }
+);
 
 
 /*
@@ -1348,23 +1985,29 @@ server.on(
   "upgrade",
   (request, socket, head) => {
 
-    if (request.url !== "/media-stream") {
+    if (
+      request.url !==
+      "/media-stream"
+    ) {
 
       socket.destroy();
 
       return;
     }
 
+
     wss.handleUpgrade(
       request,
       socket,
       head,
       (ws) => {
+
         wss.emit(
           "connection",
           ws,
           request
         );
+
       }
     );
 
@@ -1383,82 +2026,99 @@ wss.on(
   (twilioWs) => {
 
     let streamSid = null;
+
     let callSid = null;
+
     let openaiWs = null;
 
     let sessionReady = false;
+
     let initialGreetingSent = false;
 
 
     /*
-    -----------------------------------------------------
+    =====================================================
     INITIAL GREETING
-    -----------------------------------------------------
+    =====================================================
     */
 
-    const maybeStartInitialGreeting = () => {
+    const maybeStartInitialGreeting =
+      () => {
 
-      if (
-        initialGreetingSent ||
-        !sessionReady ||
-        !streamSid ||
-        !openaiWs ||
-        openaiWs.readyState !== WebSocket.OPEN
-      ) {
-        return;
-      }
+        if (
+          initialGreetingSent ||
+          !sessionReady ||
+          !streamSid ||
+          !openaiWs ||
+          openaiWs.readyState !==
+            WebSocket.OPEN
+        ) {
 
-      initialGreetingSent = true;
+          return;
 
-      openaiWs.send(
-        JSON.stringify({
+        }
 
-          type: "response.create",
 
-          response: {
+        initialGreetingSent = true;
 
-            instructions:
-              "Answer the phone now. Say a single short, natural greeting such as 'Hello?' or 'Hi, hello?' in a casual everyday voice. Do not wait for the caller to speak first. After the greeting, stop speaking and listen."
 
-          }
+        openaiWs.send(
+          JSON.stringify({
 
-        })
-      );
+            type:
+              "response.create",
 
-    };
+            response: {
+
+              instructions:
+                "Answer the phone now. Say a single short, natural greeting such as 'Hello?' or 'Hi, hello?' in a casual everyday voice. Do not wait for the caller to speak first. After the greeting, stop speaking and listen."
+
+            }
+
+          })
+        );
+
+      };
 
 
     /*
-    -----------------------------------------------------
-    CLOSE CONNECTIONS
-    -----------------------------------------------------
+    =====================================================
+    CLOSE EVERYTHING
+    =====================================================
     */
 
-    const closeEverything = () => {
+    const closeEverything =
+      () => {
 
-      try {
+        try {
 
-        if (
-          openaiWs &&
-          openaiWs.readyState === WebSocket.OPEN
-        ) {
-          openaiWs.close();
-        }
+          if (
+            openaiWs &&
+            openaiWs.readyState ===
+              WebSocket.OPEN
+          ) {
 
-      } catch {}
+            openaiWs.close();
+
+          }
+
+        } catch {}
 
 
-      try {
+        try {
 
-        if (
-          twilioWs.readyState === WebSocket.OPEN
-        ) {
-          twilioWs.close();
-        }
+          if (
+            twilioWs.readyState ===
+              WebSocket.OPEN
+          ) {
 
-      } catch {}
+            twilioWs.close();
 
-    };
+          }
+
+        } catch {}
+
+      };
 
 
     if (!OPENAI_API_KEY) {
@@ -1471,30 +2131,31 @@ wss.on(
 
 
     /*
-    -----------------------------------------------------
+    =====================================================
     OPENAI REALTIME
-    -----------------------------------------------------
+    =====================================================
     */
 
     const openaiUrl =
       "wss://api.openai.com/v1/realtime?model=gpt-realtime-2.1";
 
 
-    openaiWs = new WebSocket(
-      openaiUrl,
-      {
-        headers: {
-          Authorization:
-            `Bearer ${OPENAI_API_KEY}`
+    openaiWs =
+      new WebSocket(
+        openaiUrl,
+        {
+          headers: {
+            Authorization:
+              `Bearer ${OPENAI_API_KEY}`
+          }
         }
-      }
-    );
+      );
 
 
     /*
-    -----------------------------------------------------
+    =====================================================
     OPENAI CONNECTION
-    -----------------------------------------------------
+    =====================================================
     */
 
     openaiWs.on(
@@ -1504,11 +2165,13 @@ wss.on(
         openaiWs.send(
           JSON.stringify({
 
-            type: "session.update",
+            type:
+              "session.update",
 
             session: {
 
-              type: "realtime",
+              type:
+                "realtime",
 
               model:
                 "gpt-realtime-2.1",
@@ -1518,9 +2181,9 @@ wss.on(
 
 
               /*
-              -------------------------------------------
+              ===========================================
               AUDIO
-              -------------------------------------------
+              ===========================================
               */
 
               audio: {
@@ -1533,17 +2196,23 @@ wss.on(
 
                   turn_detection: {
 
-                    type: "server_vad",
+                    type:
+                      "server_vad",
 
-                    threshold: 0.5,
+                    threshold:
+                      0.5,
 
-                    prefix_padding_ms: 300,
+                    prefix_padding_ms:
+                      300,
 
-                    silence_duration_ms: 800,
+                    silence_duration_ms:
+                      800,
 
-                    create_response: true,
+                    create_response:
+                      true,
 
-                    interrupt_response: true
+                    interrupt_response:
+                      true
 
                   }
 
@@ -1556,7 +2225,8 @@ wss.on(
                     type: "audio/pcmu"
                   },
 
-                  voice: "marin"
+                  voice:
+                    "marin"
 
                 }
 
@@ -1564,29 +2234,33 @@ wss.on(
 
 
               /*
-              -------------------------------------------
+              ===========================================
               END CALL TOOL
-              -------------------------------------------
+              ===========================================
               */
 
               tools: [
 
                 {
 
-                  type: "function",
+                  type:
+                    "function",
 
-                  name: "end_call",
+                  name:
+                    "end_call",
 
                   description:
                     "Immediately terminate the phone call. Use this when the caller attempts to obtain personal, private, financial, authentication, identifying, or other sensitive information about the protected person or anyone else, or when the call must be ended for safety.",
 
                   parameters: {
 
-                    type: "object",
+                    type:
+                      "object",
 
                     properties: {},
 
-                    additionalProperties: false
+                    additionalProperties:
+                      false
 
                   }
 
@@ -1600,9 +2274,9 @@ wss.on(
 
 
               /*
-              -------------------------------------------
+              ===========================================
               CONVERSATIONAL AGENT
-              -------------------------------------------
+              ===========================================
               */
 
               instructions: `
@@ -2121,7 +2795,6 @@ Most importantly, sound like an ordinary person having a casual phone conversati
             }
 
           })
-
         );
 
       }
@@ -2129,9 +2802,9 @@ Most importantly, sound like an ordinary person having a casual phone conversati
 
 
     /*
-    -----------------------------------------------------
+    =====================================================
     OPENAI EVENTS
-    -----------------------------------------------------
+    =====================================================
     */
 
     openaiWs.on(
@@ -2143,7 +2816,9 @@ Most importantly, sound like an ordinary person having a casual phone conversati
         try {
 
           event =
-            JSON.parse(raw.toString());
+            JSON.parse(
+              raw.toString()
+            );
 
         } catch {
 
@@ -2153,9 +2828,9 @@ Most importantly, sound like an ordinary person having a casual phone conversati
 
 
         /*
-        -----------------------------------------------
+        ================================================
         END CALL TOOL
-        -----------------------------------------------
+        ================================================
         */
 
         if (
@@ -2164,7 +2839,8 @@ Most importantly, sound like an ordinary person having a casual phone conversati
         ) {
 
           if (
-            event.name === "end_call"
+            event.name ===
+            "end_call"
           ) {
 
             console.log(
@@ -2183,7 +2859,8 @@ Most importantly, sound like an ordinary person having a casual phone conversati
                 await twilioClient
                   .calls(callSid)
                   .update({
-                    status: "completed"
+                    status:
+                      "completed"
                   });
 
               } catch (err) {
@@ -2208,9 +2885,9 @@ Most importantly, sound like an ordinary person having a casual phone conversati
 
 
         /*
-        -----------------------------------------------
+        ================================================
         SESSION READY
-        -----------------------------------------------
+        ================================================
         */
 
         if (
@@ -2230,9 +2907,9 @@ Most importantly, sound like an ordinary person having a casual phone conversati
 
 
         /*
-        -----------------------------------------------
+        ================================================
         AUDIO TO TWILIO
-        -----------------------------------------------
+        ================================================
         */
 
         if (
@@ -2249,13 +2926,16 @@ Most importantly, sound like an ordinary person having a casual phone conversati
             twilioWs.send(
               JSON.stringify({
 
-                event: "media",
+                event:
+                  "media",
 
                 streamSid,
 
                 media: {
+
                   payload:
                     event.delta
+
                 }
 
               })
@@ -2269,13 +2949,14 @@ Most importantly, sound like an ordinary person having a casual phone conversati
 
 
         /*
-        -----------------------------------------------
+        ================================================
         ERRORS
-        -----------------------------------------------
+        ================================================
         */
 
         if (
-          event.type === "error"
+          event.type ===
+          "error"
         ) {
 
           console.error(
@@ -2290,9 +2971,9 @@ Most importantly, sound like an ordinary person having a casual phone conversati
 
 
     /*
-    -----------------------------------------------------
+    =====================================================
     OPENAI CLOSE
-    -----------------------------------------------------
+    =====================================================
     */
 
     openaiWs.on(
@@ -2317,9 +2998,9 @@ Most importantly, sound like an ordinary person having a casual phone conversati
 
 
     /*
-    -----------------------------------------------------
+    =====================================================
     OPENAI ERROR
-    -----------------------------------------------------
+    =====================================================
     */
 
     openaiWs.on(
@@ -2336,9 +3017,9 @@ Most importantly, sound like an ordinary person having a casual phone conversati
 
 
     /*
-    -----------------------------------------------------
+    =====================================================
     TWILIO EVENTS
-    -----------------------------------------------------
+    =====================================================
     */
 
     twilioWs.on(
@@ -2350,7 +3031,9 @@ Most importantly, sound like an ordinary person having a casual phone conversati
         try {
 
           msg =
-            JSON.parse(raw.toString());
+            JSON.parse(
+              raw.toString()
+            );
 
         } catch {
 
@@ -2360,13 +3043,14 @@ Most importantly, sound like an ordinary person having a casual phone conversati
 
 
         /*
-        -----------------------------------------------
+        ================================================
         CALL START
-        -----------------------------------------------
+        ================================================
         */
 
         if (
-          msg.event === "start"
+          msg.event ===
+          "start"
         ) {
 
           streamSid =
@@ -2394,13 +3078,14 @@ Most importantly, sound like an ordinary person having a casual phone conversati
 
 
         /*
-        -----------------------------------------------
+        ================================================
         CALL AUDIO
-        -----------------------------------------------
+        ================================================
         */
 
         if (
-          msg.event === "media"
+          msg.event ===
+          "media"
         ) {
 
           if (
@@ -2415,10 +3100,12 @@ Most importantly, sound like an ordinary person having a casual phone conversati
           }
 
 
-          // Twilio and OpenAI both support
-          // G.711 μ-law (PCMU) at 8 kHz,
-          // so the phone audio can be forwarded
-          // without transcoding.
+          /*
+          Twilio and OpenAI both support
+          G.711 μ-law / PCMU at 8 kHz,
+          so the phone audio can be forwarded
+          without transcoding.
+          */
 
           openaiWs.send(
             JSON.stringify({
@@ -2438,13 +3125,14 @@ Most importantly, sound like an ordinary person having a casual phone conversati
 
 
         /*
-        -----------------------------------------------
+        ================================================
         CALL STOP
-        -----------------------------------------------
+        ================================================
         */
 
         if (
-          msg.event === "stop"
+          msg.event ===
+          "stop"
         ) {
 
           closeEverything();
@@ -2456,9 +3144,9 @@ Most importantly, sound like an ordinary person having a casual phone conversati
 
 
     /*
-    -----------------------------------------------------
+    =====================================================
     TWILIO CLOSE
-    -----------------------------------------------------
+    =====================================================
     */
 
     twilioWs.on(
@@ -2484,9 +3172,9 @@ Most importantly, sound like an ordinary person having a casual phone conversati
 
 
     /*
-    -----------------------------------------------------
+    =====================================================
     TWILIO ERROR
-    -----------------------------------------------------
+    =====================================================
     */
 
     twilioWs.on(
