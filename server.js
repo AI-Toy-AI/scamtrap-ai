@@ -516,7 +516,7 @@ app.get("/", (_req, res) => {
     }
 
     .difference-list li::before {
-            content: "\2713";
+            content: "\\2713";
 
       color: #65e6a0;
 
@@ -527,7 +527,7 @@ app.get("/", (_req, res) => {
 
     .difference-card:not(.featured)
     .difference-list li::before {
-            content: "\2022";
+            content: "\\2022";
 
       color: #718096;
     }
