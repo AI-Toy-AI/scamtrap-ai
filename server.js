@@ -248,6 +248,7 @@ app.get("/", (_req, res) => {
     <nav>
       <div class="logo">Scam<span>Trap</span></div>
       <a href="#how">How it works</a>
+<a href="#mobile">Mobile Apps</a>
     </nav>
 
     <main>
@@ -374,7 +375,47 @@ app.get("/", (_req, res) => {
         </div>
 
       </section>
+<section id="mobile">
 
+  <div class="section-title">
+    <h2>ScamTrap on Mobile</h2>
+
+    <p>
+      ScamTrap is coming to your phone. Dedicated iOS and Android
+      applications are currently in development and will be added here
+      when they're ready.
+    </p>
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>iPhone & iPad</h3>
+      <p>
+        The ScamTrap iOS app is coming soon. We'll add the App Store
+        download here when it's available.
+      </p>
+
+      <span class="button secondary" style="opacity:0.6; cursor:default;">
+        Coming Soon
+      </span>
+    </div>
+
+    <div class="card">
+      <h3>Android</h3>
+      <p>
+        The ScamTrap Android app is coming soon. We'll add the Google Play
+        download here when it's available.
+      </p>
+
+      <span class="button secondary" style="opacity:0.6; cursor:default;">
+        Coming Soon
+      </span>
+    </div>
+
+  </div>
+
+</section>
       <div class="cta">
         <h2>Give suspicious callers someone to talk to.</h2>
 
