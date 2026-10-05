@@ -1933,16 +1933,19 @@ app.get("/", (_req, res) => {
 
         <p>
 
-          A quiet thank-you to my parents &mdash; for their
-          love, support, encouragement, and belief in me.
+  A quiet thank-you to my parents &mdash; for their
+  love, support, encouragement, and belief in me.
 
-          And especially to my dad, whose example and
-          influence continue to inspire me. He may not
-          be here to see where this journey goes, but
-          what he gave me is still part of everything
-          I build.
+  And especially to my dad, whose example and
+  influence continue to inspire me. I&rsquo;m grateful
+  to have him in my life and for everything he has
+  taught me along the way.
 
-        </p>
+  And for someone who is no longer here to see
+  where this journey goes &mdash; their memory is
+  carried with me in everything I build.
+
+</p>
 
       </div>
 
