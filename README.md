@@ -1,4 +1,4 @@
-# ScamTrap AI — live phone agent
+# ScamDecoy AI — live phone agent
 
 This service connects a Twilio Voice number to the OpenAI Realtime API.
 
