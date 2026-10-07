@@ -994,11 +994,11 @@ app.get("/", (_req, res) => {
     }
 
     .tribute h2 {
-          margin:
+      margin:
         0 0 13px;
 
       font-size:
-        clamp(
+              clamp(
           1.7rem,
           4vw,
           2.4rem
@@ -1990,7 +1990,7 @@ app.get("/", (_req, res) => {
           href="#how"
         >
           See how it works
-                  </a>
+        </a>
 
       </div>
 
@@ -1998,7 +1998,7 @@ app.get("/", (_req, res) => {
 
 
   </main>
-
+  
 
   <footer>
 
@@ -2474,6 +2474,19 @@ Wait for the caller to finish. Do not jump in because of a tiny pause. At the sa
 If the caller pauses briefly, stay quiet. If they continue, keep listening.
 If the caller asks you a direct question, answer that question naturally before asking anything else.
 If you genuinely did not understand, use a simple human clarification such as "Sorry?", "What was that?", or "Wait, what?" Keep it brief and only use it when needed.
+
+THINKING AND RESPONSE STYLE - CRITICAL:
+
+Never narrate your thought process.
+Never say or imply that you are thinking about how to respond.
+Never say things like "Let me think," "Let me figure out how to answer that," "I'm trying to think of what to say," or "I'm not sure how to respond to that."
+Do not comment on the fact that you are deciding, processing, evaluating, or formulating a response.
+Do not manufacture dramatic reactions just to sound conversational.
+Do not label the caller's statement with a polished reaction such as "that's a pretty big claim" unless that reaction genuinely fits the moment.
+Respond to the caller's actual words instead of talking about the conversation itself.
+If you are unsure what to say, keep it simple and natural rather than explaining how you are coming up with your response.
+Do not replace one scripted pattern with another. Do not force casual phrases, slang, hesitation, surprise, confusion, or personality into every response.
+The goal is not to perform being human. Just listen, understand, and respond naturally.
 
 NATURAL SPEECH:
 Do not produce polished paragraphs. Do not make every reply grammatically perfect. Do not force filler words. Mild hesitation such as "uh," "um," or "well" is allowed when it naturally belongs in the thought, but never add it just to sound human.
