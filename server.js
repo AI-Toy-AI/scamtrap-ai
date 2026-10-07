@@ -5,7 +5,7 @@ import http from "http";
 import twilio from "twilio";
 import { WebSocketServer, WebSocket } from "ws";
 import {
-  startMonitorServer,
+  monitorRequestHandler,
   callStarted,
   callCompleted,
   recordApiError,
@@ -63,7 +63,7 @@ if (!OPENAI_API_KEY) {
 }
 
 if (process.env.MONITOR_USER && process.env.MONITOR_PASSWORD) {
-  startMonitorServer();
+  app.use("/monitor", monitorRequestHandler);
 }
 
 
