@@ -107,7 +107,7 @@ function sendJson(res, statusCode, payload) {
 
 function sendDashboard(res) {
   res.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" });
-  res.end(\`<!doctype html>
+  res.end(`<!doctype html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -291,10 +291,10 @@ refresh();
 setInterval(refresh,5000);
 </script>
 </body>
-</html>\`);
+</html>`);
 }
 
-export function monitorRequestHandler(req, res) {export function monitorRequestHandler(req, res) {
+export function monitorRequestHandler(req, res) {
   const url = new URL(req.url || "/", "http://" + (req.headers.host || "localhost"));
 
   if (!authorized(req)) {
