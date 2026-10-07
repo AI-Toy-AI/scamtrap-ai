@@ -1190,12 +1190,20 @@ app.get("/", (_req, res) => {
         Why ScamDecoy
       </a>
 
+      <a href="#story">
+        Our Story
+      </a>
+
       <a href="#how">
         How it works
       </a>
 
-      <a href="#future">
-        What's next
+      <a href="#faq">
+        FAQ
+      </a>
+
+      <a href="#policies">
+        Policies
       </a>
 
     </div>
@@ -1713,6 +1721,361 @@ app.get("/", (_req, res) => {
     </section>
 
 
+    <!-- OUR STORY / WHO WE ARE -->
+
+    <section id="story">
+
+      <div class="section-title">
+
+        <div class="eyebrow">
+          Who we are
+        </div>
+
+        <h2>
+          Built because people deserve a little more peace.
+        </h2>
+
+        <p>
+          ScamDecoy was created around a simple idea:
+          when an unwanted or suspicious caller reaches
+          you, you shouldn't always have to be the one
+          who deals with it.
+        </p>
+
+      </div>
+
+      <div class="difference">
+
+        <div class="difference-card featured">
+
+          <h3>
+            Why I built it
+          </h3>
+
+          <p>
+            Scam calls are more than an inconvenience.
+            They can interrupt your day, create stress,
+            and make you wonder whether the next call
+            you answer is going to be legitimate.
+          </p>
+
+          <p>
+            I wanted to build something that changes that
+            experience. Instead of putting all the pressure
+            on the person receiving the call, ScamDecoy
+            gives the caller someone else to talk to.
+          </p>
+
+          <p>
+            The goal is simple: give people more control
+            over their time, their attention, and the
+            information they choose to share.
+          </p>
+
+        </div>
+
+        <div class="difference-card">
+
+          <h3>
+            Who we're building for
+          </h3>
+
+          <p>
+            ScamDecoy is for everyday people who are tired
+            of suspicious calls, aggressive sales calls,
+            impersonators, and unknown numbers demanding
+            attention.
+          </p>
+
+          <ul class="difference-list">
+
+            <li>
+              People who receive frequent unwanted calls
+            </li>
+
+            <li>
+              Families who want an extra layer of protection
+            </li>
+
+            <li>
+              People who simply don't want to engage with
+              suspicious callers
+            </li>
+
+            <li>
+              Anyone who values privacy and peace of mind
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- TRUST / WHAT SCAMDECOY IS NOT -->
+
+    <section>
+
+      <div class="section-title">
+
+        <div class="eyebrow">
+          Important to know
+        </div>
+
+        <h2>
+          Protection, not a promise of perfection.
+        </h2>
+
+        <p>
+          ScamDecoy is designed to help reduce unwanted
+          interactions with suspicious callers. It is not
+          a guarantee that every scam, fraud attempt, or
+          unwanted call will be identified or stopped.
+        </p>
+
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-icon">01</div>
+          <h3>No emergency service</h3>
+          <p>
+            ScamDecoy is not a replacement for 911,
+            emergency services, law enforcement, or
+            professional financial or legal advice.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">02</div>
+          <h3>Stay in control</h3>
+          <p>
+            Never rely on ScamDecoy alone when a caller
+            is requesting money, account access, passwords,
+            verification codes, or other sensitive information.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">03</div>
+          <h3>Keep your information private</h3>
+          <p>
+            ScamDecoy is designed not to provide protected
+            personal information to callers. You should
+            still avoid sharing sensitive information with
+            unknown callers.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FAQ -->
+
+    <section id="faq">
+
+      <div class="section-title">
+
+        <div class="eyebrow">
+          Questions
+        </div>
+
+        <h2>
+          Frequently asked questions.
+        </h2>
+
+      </div>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="number">?</div>
+          <div>
+            <h3>What is ScamDecoy?</h3>
+            <p>
+              ScamDecoy is a call-screening service designed
+              to answer suspicious or unwanted calls and keep
+              the conversation away from you.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="number">?</div>
+          <div>
+            <h3>Is ScamDecoy a real person?</h3>
+            <p>
+              No. ScamDecoy uses an AI voice system to handle
+              conversations. It is designed to sound natural,
+              but it should not be treated as a human operator.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="number">?</div>
+          <div>
+            <h3>Will ScamDecoy catch every scam?</h3>
+            <p>
+              No service can guarantee that. ScamDecoy is
+              designed as an additional layer of protection,
+              not as a guarantee against fraud.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="number">?</div>
+          <div>
+            <h3>What happens if a caller asks for private information?</h3>
+            <p>
+              ScamDecoy is designed not to provide passwords,
+              verification codes, financial credentials, or
+              other protected personal information. Certain
+              sensitive requests may cause the call to end.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="number">?</div>
+          <div>
+            <h3>How does the 30-day trial work?</h3>
+            <p>
+              New customers will receive a 30-day free trial.
+              Any paid subscription terms, price, and billing
+              timing will be displayed before a customer commits
+              to the paid service.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="number">?</div>
+          <div>
+            <h3>Do I need an app?</h3>
+            <p>
+              Not right now. ScamDecoy is starting with its
+              phone service. Dedicated iOS and Android apps
+              are planned for a later release.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- POLICIES -->
+
+    <section id="policies">
+
+      <div class="section-title">
+
+        <div class="eyebrow">
+          Trust & transparency
+        </div>
+
+        <h2>
+          Our policies.
+        </h2>
+
+        <p>
+          We want you to understand how ScamDecoy works,
+          what information we handle, and what you can
+          expect from the service.
+        </p>
+
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-icon">P</div>
+          <h3>Privacy Policy</h3>
+          <p>
+            Learn what information ScamDecoy may collect,
+            how it is used, and how payment processing is
+            handled through third-party providers.
+          </p>
+          <a class="button secondary" href="/privacy">
+            Read Privacy Policy
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">T</div>
+          <h3>Terms of Service</h3>
+          <p>
+            Review the rules for using ScamDecoy,
+            subscriptions, acceptable use, limitations,
+            cancellations, and other service terms.
+          </p>
+          <a class="button secondary" href="/terms">
+            Read Terms of Service
+          </a>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">R</div>
+          <h3>Refunds & cancellation</h3>
+          <p>
+            Subscription cancellation and refund details
+            will be presented clearly before paid service
+            begins and will be reflected in the final
+            checkout terms.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="verse-card" style="margin-top:24px;">
+
+        <p style="margin:0;color:#aab5c4;">
+          ScamDecoy uses third-party providers for services
+          such as telecommunications, AI processing, hosting,
+          and payment processing. Their own terms and privacy
+          notices may also apply to those services.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section>
+
+      <div class="section-title">
+
+        <div class="eyebrow">
+          Need help?
+        </div>
+
+        <h2>
+          We're here to help.
+        </h2>
+
+        <p>
+          Questions about ScamDecoy, your account, or your
+          subscription should be directed to ScamDecoy
+          support. Official support contact information will
+          be published before paid subscriptions go live.
+        </p>
+
+      </div>
+
+    </section>
+
+
     <!-- FUTURE TEXT FEATURE -->
 
     <section id="future">
@@ -1870,18 +2233,23 @@ app.get("/", (_req, res) => {
       <div class="trial">
 
         <div class="trial-badge">
-          FIRST MONTH FREE AT LAUNCH
+          30-DAY FREE TRIAL
         </div>
 
         <h3>
-          Be among the first to try ScamDecoy.
+          Try ScamDecoy for 30 days.
         </h3>
 
         <p>
-          We're building ScamDecoy now and preparing
-          for launch. The first month will be free for
-          early customers. Pricing details will be announced
-          when subscriptions are ready.
+          We're preparing ScamDecoy for launch with a
+          30-day free trial for new customers. You'll be
+          able to see how it fits into your everyday life
+          before your paid subscription begins.
+        </p>
+
+        <p style="margin-top:14px;">
+          Subscription pricing and billing details will be
+          shown clearly before you start a paid plan.
         </p>
 
       </div>
@@ -2008,6 +2376,27 @@ app.get("/", (_req, res) => {
 
     - Defensive call screening
 
+    <div style="margin-top:14px;">
+
+      <a href="/privacy" style="margin:0 10px;color:#aab5c4;">
+        Privacy Policy
+      </a>
+
+      <a href="/terms" style="margin:0 10px;color:#aab5c4;">
+        Terms of Service
+      </a>
+
+      <a href="#faq" style="margin:0 10px;color:#aab5c4;">
+        FAQ
+      </a>
+
+    </div>
+
+    <div style="margin-top:12px;font-size:0.78rem;">
+      ScamDecoy is a defensive call-screening service and is
+      not a guarantee against scams or fraud.
+    </div>
+
   </footer>
 
 
@@ -2017,6 +2406,269 @@ app.get("/", (_req, res) => {
 
 </html>`);
 
+});
+
+
+
+/*
+=========================================================
+SCAMDECOY PRIVACY POLICY
+=========================================================
+*/
+
+app.get("/privacy", (_req, res) => {
+  res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScamDecoy - Privacy Policy</title>
+<style>
+body{margin:0;background:#08111f;color:#f5f7fa;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.7}
+main{width:min(900px,90%);margin:0 auto;padding:55px 0 80px}
+a{color:#65e6a0} h1{font-size:clamp(2.3rem,6vw,4rem);line-height:1.05}
+h2{margin-top:38px} p,li{color:#c9d2de}.notice{padding:18px;border:1px solid #315c49;background:#102a21;border-radius:14px}
+.small{color:#8e9bad;font-size:.9rem}.back{display:inline-block;margin-bottom:30px}
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="/">← Back to ScamDecoy</a>
+<h1>Privacy Policy</h1>
+<p class="small">Draft for launch review. Effective date: to be added before launch.</p>
+
+<div class="notice">
+This policy is intended to explain how ScamDecoy handles information. It is a working draft and should be reviewed and finalized for the business, service configuration, and jurisdictions in which ScamDecoy operates before paid launch.
+</div>
+
+<h2>1. What this policy covers</h2>
+<p>
+This Privacy Policy explains how ScamDecoy may collect, use, protect, and disclose information when you visit our website, use the ScamDecoy service, contact us, or subscribe to a paid plan.
+</p>
+
+<h2>2. Information you provide</h2>
+<ul>
+<li>Account and contact information, such as your name, email address, phone number, and information you provide when requesting support.</li>
+<li>Service information needed to provide ScamDecoy, such as the phone number or routing information associated with your service.</li>
+<li>Subscription and customer-service information.</li>
+<li>Information you voluntarily provide to us in communications.</li>
+</ul>
+
+<h2>3. Call and service information</h2>
+<p>
+When ScamDecoy handles a call, our systems may process information needed to establish, route, operate, monitor, troubleshoot, and secure the call. This can include caller and call metadata such as telephone numbers, timestamps, call duration, connection status, and technical error information.
+</p>
+<p>
+ScamDecoy's service may process the content of a live conversation so the voice system can respond to the caller. We do not use the service to intentionally request or collect passwords, verification codes, bank credentials, or similar sensitive information from callers.
+</p>
+
+<h2>4. How we use information</h2>
+<ul>
+<li>To provide and operate ScamDecoy.</li>
+<li>To answer and handle calls through the service.</li>
+<li>To protect the service, detect abuse, troubleshoot problems, and maintain reliability.</li>
+<li>To provide customer support.</li>
+<li>To manage subscriptions and billing.</li>
+<li>To improve the service and develop new features.</li>
+<li>To comply with legal obligations and protect our rights.</li>
+</ul>
+
+<h2>5. Service providers</h2>
+<p>
+ScamDecoy relies on third-party providers to operate parts of the service. Depending on the service configuration, these may include telecommunications providers, AI/voice-processing providers, hosting providers, analytics or monitoring providers, and payment processors.
+</p>
+<p>
+For payments, ScamDecoy plans to use Square. Payment information entered into Square's checkout is processed by Square under Square's applicable terms and privacy notices. ScamDecoy does not need to receive or store your full payment-card number to process a Square checkout.
+</p>
+<p>
+Square maintains its own privacy notices and payment terms, which may apply to your interaction with Square. You can review Square's current privacy information and payment terms on Square's website.
+</p>
+
+<h2>6. Information we share</h2>
+<p>
+We may share information with service providers that need it to operate ScamDecoy, process payments, provide telecommunications or AI services, host the service, provide support, or maintain security. We may also disclose information when required by law, to respond to lawful requests, to protect users or the service, or in connection with a business transfer.
+</p>
+
+<h2>7. Data retention</h2>
+<p>
+We retain information for as long as reasonably necessary for the purposes described in this policy, including providing the service, maintaining security and records, resolving disputes, and meeting legal or business requirements. Specific retention periods may vary by information type and service provider.
+</p>
+
+<h2>8. Security</h2>
+<p>
+We use reasonable technical and organizational measures designed to protect information. No internet-connected service can guarantee absolute security.
+</p>
+
+<h2>9. Your choices and requests</h2>
+<p>
+Depending on applicable law, you may have rights to request access to, correction of, deletion of, or information about certain personal information. Requests may be subject to verification and legal exceptions.
+</p>
+
+<h2>10. Children</h2>
+<p>
+ScamDecoy is not directed to children under the age required by applicable law, and we do not knowingly design the service to collect personal information from children.
+</p>
+
+<h2>11. Third-party services</h2>
+<p>
+Links or integrations with third-party services are governed by those providers' own terms and privacy notices. ScamDecoy is not responsible for the privacy practices of third parties outside our control.
+</p>
+
+<h2>12. Changes to this policy</h2>
+<p>
+We may update this Privacy Policy as ScamDecoy develops or as legal or operational requirements change. The updated version will be posted on this page with a revised effective date when appropriate.
+</p>
+
+<h2>13. Contact</h2>
+<p>
+ScamDecoy support contact information will be published before paid subscriptions go live. Please do not send passwords, verification codes, full payment-card numbers, or other highly sensitive information by ordinary email or support message.
+</p>
+
+<p class="small">This is a business draft, not legal advice. Finalize this policy with the actual data flows, vendors, contact information, and applicable legal requirements before launch.</p>
+</main>
+</body>
+</html>`);
+});
+
+
+/*
+=========================================================
+SCAMDECOY TERMS OF SERVICE
+=========================================================
+*/
+
+app.get("/terms", (_req, res) => {
+  res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScamDecoy - Terms of Service</title>
+<style>
+body{margin:0;background:#08111f;color:#f5f7fa;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.7}
+main{width:min(900px,90%);margin:0 auto;padding:55px 0 80px}
+a{color:#65e6a0} h1{font-size:clamp(2.3rem,6vw,4rem);line-height:1.05}
+h2{margin-top:38px} p,li{color:#c9d2de}.notice{padding:18px;border:1px solid #315c49;background:#102a21;border-radius:14px}
+.small{color:#8e9bad;font-size:.9rem}.back{display:inline-block;margin-bottom:30px}
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="/">← Back to ScamDecoy</a>
+<h1>Terms of Service</h1>
+<p class="small">Draft for launch review. Effective date: to be added before launch.</p>
+
+<div class="notice">
+These Terms are a working business draft. They should be finalized after the ScamDecoy service, subscription price, billing flow, support process, and applicable legal requirements are confirmed.
+</div>
+
+<h2>1. Acceptance</h2>
+<p>
+By using ScamDecoy, you agree to these Terms and any additional terms presented when you purchase or use a specific ScamDecoy feature. If you do not agree, do not use the service.
+</p>
+
+<h2>2. The ScamDecoy service</h2>
+<p>
+ScamDecoy is a defensive call-screening service designed to answer and handle suspicious or unwanted calls. The service uses automated voice technology and third-party infrastructure to provide call handling.
+</p>
+<p>
+ScamDecoy is not an emergency service, law-enforcement service, fraud investigation service, financial service, legal service, or guarantee against scams or fraud.
+</p>
+
+<h2>3. No guarantee</h2>
+<p>
+ScamDecoy is designed to reduce unwanted interactions with suspicious callers, but no automated system can identify, stop, or handle every scam or unwanted call correctly. You remain responsible for decisions involving money, accounts, identity, passwords, verification codes, and other sensitive matters.
+</p>
+
+<h2>4. Eligibility and account information</h2>
+<p>
+You must provide accurate information needed to create and maintain your account and use the service. You are responsible for keeping your account information reasonably secure and for activity conducted through your account.
+</p>
+
+<h2>5. Free trial and subscriptions</h2>
+<p>
+ScamDecoy plans to offer a 30-day free trial to eligible new customers. Trial eligibility, length, limitations, and availability may change before launch.
+</p>
+<p>
+If you continue to a paid subscription, the applicable price, billing frequency, taxes, and other material terms will be presented before you commit to the paid service. Unless otherwise stated at checkout, a subscription may renew automatically until canceled.
+</p>
+
+<h2>6. Payments</h2>
+<p>
+ScamDecoy plans to use Square for payment processing. Payment processing is subject to Square's applicable terms and policies in addition to these Terms. ScamDecoy does not control Square's payment systems, approval decisions, outages, or policies.
+</p>
+<p>
+You authorize the payment method you select at checkout to be charged according to the subscription terms you accepted. You are responsible for providing valid payment information and keeping it current.
+</p>
+
+<h2>7. Cancellation and refunds</h2>
+<p>
+You may cancel a subscription according to the cancellation method provided by ScamDecoy. Cancellation generally stops future renewal charges but may not automatically refund a period that has already begun, except where required by law or where ScamDecoy's posted refund policy says otherwise.
+</p>
+<p>
+The final launch version will state the exact cancellation timing, refund rules, and trial-to-paid billing terms before subscriptions go live.
+</p>
+
+<h2>8. Acceptable use</h2>
+<p>You may not use ScamDecoy to:</p>
+<ul>
+<li>Break the law or facilitate illegal activity.</li>
+<li>Harass, threaten, stalk, impersonate, or harm another person.</li>
+<li>Attempt to interfere with or disrupt ScamDecoy or its providers.</li>
+<li>Attempt to gain unauthorized access to accounts, systems, or data.</li>
+<li>Use the service in a way that violates telecommunications, privacy, recording, consumer-protection, or other applicable laws.</li>
+<li>Misrepresent ScamDecoy or use it to create unlawful or deceptive schemes.</li>
+</ul>
+
+<h2>9. Calls, recordings, and consent</h2>
+<p>
+You are responsible for using ScamDecoy in compliance with applicable laws governing telephone calls, monitoring, recording, consent, privacy, and communications. Laws may vary by location and circumstance. ScamDecoy does not provide legal advice about call-recording or consent requirements.
+</p>
+
+<h2>10. Third-party services</h2>
+<p>
+ScamDecoy depends on third-party providers, which may include telecommunications, AI, hosting, monitoring, and payment providers. Those providers may have their own terms, privacy notices, technical limitations, and service interruptions.
+</p>
+
+<h2>11. Service availability</h2>
+<p>
+We aim to keep ScamDecoy available and reliable, but we do not guarantee uninterrupted or error-free operation. Service may be temporarily unavailable for maintenance, outages, provider failures, security events, or circumstances outside our control.
+</p>
+
+<h2>12. Intellectual property</h2>
+<p>
+ScamDecoy and its software, branding, website content, design, and related materials are owned by ScamDecoy or its licensors unless otherwise stated. These Terms do not transfer ownership to you.
+</p>
+
+<h2>13. Feedback</h2>
+<p>
+If you voluntarily provide suggestions or feedback about ScamDecoy, you grant ScamDecoy permission to use that feedback to improve the service without owing you compensation, unless applicable law requires otherwise.
+</p>
+
+<h2>14. Disclaimers</h2>
+<p>
+To the fullest extent permitted by law, ScamDecoy is provided on an as-available basis and without guarantees that the service will identify every scam, prevent every loss, or be suitable for every purpose. Nothing in these Terms removes rights that cannot legally be waived.
+</p>
+
+<h2>15. Limitation of liability</h2>
+<p>
+To the fullest extent permitted by applicable law, ScamDecoy and its providers will not be responsible for indirect, incidental, special, consequential, exemplary, or similar damages arising from use of the service, subject to any rights or limitations that cannot legally be excluded.
+</p>
+
+<h2>16. Changes</h2>
+<p>
+We may update these Terms as ScamDecoy develops. When changes are material, we will provide notice in a manner appropriate to the circumstances. Continued use after an updated effective date may constitute acceptance where permitted by law.
+</p>
+
+<h2>17. Contact</h2>
+<p>
+Official ScamDecoy support contact information will be published before paid subscriptions go live.
+</p>
+
+<p class="small">This is a business draft, not legal advice. Finalize it with the actual business identity, state of formation, governing law, subscription price, refund policy, contact information, and final service/data practices before launch.</p>
+</main>
+</body>
+</html>`);
 });
 
 
