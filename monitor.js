@@ -81,7 +81,50 @@ function sendJson(res, statusCode, payload) {
 
 function sendDashboard(res) {
   res.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store" });
-  res.end(`<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>ScamDecoy Monitor</title><style>body{margin:0;background:#07111f;color:#f5f7fa;font-family:system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:1100px;margin:auto;padding:30px 18px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px}.brand{font-size:1.6rem;font-weight:900}.brand span{color:#65e6a0}.status{padding:8px 13px;border-radius:999px;background:#123522;color:#65e6a0;font-weight:800}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0}.card{background:#0d1b2d;border:1px solid #1d3047;border-radius:16px;padding:20px}.label{color:#8290a3;font-size:.78rem;text-transform:uppercase;letter-spacing:1px}.value{font-size:2rem;font-weight:900;margin-top:7px}table{width:100%;border-collapse:collapse;background:#0d1b2d;border:1px solid #1d3047;border-radius:16px;overflow:hidden}th,td{text-align:left;padding:12px;border-bottom:1px solid #1d3047;font-size:.9rem}th{color:#8290a3}.ok{color:#65e6a0}.err{color:#ff8d8d}@media(max-width:750px){.grid{grid-template-columns:repeat(2,1fr)}.top{align-items:flex-start;flex-direction:column}}</style></head><body><main class="wrap"><div class="top"><div class="brand">Scam<span>Decoy</span> Monitor</div><div class="status">PRIVATE • LIVE</div></div><div class="grid" id="cards"></div><h2>Recent activity</h2><table><thead><tr><th>Time</th><th>Event</th><th>Details</th></tr></thead><tbody id="events"><tr><td colspan="3">Loading...</td></tr></tbody></table></main><script>async function refresh(){try{const s=await fetch('/stats',{credentials:'same-origin'}).then(r=>r.json());document.getElementById('cards').innerHTML='<div class="card"><div class="label">System</div><div class="value ok">'+s.status+'</div></div><div class="card"><div class="label">Active calls</div><div class="value">'+s.activeCalls+'</div></div><div class="card"><div class="label">Calls started</div><div class="value">'+s.counters.callsStarted+'</div></div><div class="card"><div class="label">Errors</div><div class="value '+(s.counters.errors?'err':'')+'">'+s.counters.errors+'</div></div>';const e=await fetch('/events?limit=30',{credentials:'same-origin'}).then(r=>r.json());document.getElementById('events').innerHTML=e.events.length?e.events.map(x=>'<tr><td>'+new Date(x.timestamp).toLocaleString()+'</td><td>'+x.type+'</td><td>'+JSON.stringify(x.data).replace(/</g,'&lt;')+'</td></tr>').join(''):'<tr><td colspan="3">No events yet.</td></tr>';}catch(e){console.error(e)}}refresh();setInterval(refresh,5000);</script></body></html>`);
+  res.end(`<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>ScamDecoy Monitor</title><style>body{margin:0;background:#07111f;color:#f5f7fa;font-family:system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:1100px;margin:auto;padding:30px 18px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px}.brand{font-size:1.6rem;font-weight:900}.brand span{color:#65e6a0}.status{padding:8px 13px;border-radius:999px;background:#123522;color:#65e6a0;font-weight:800}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0}.card{background:#0d1b2d;border:1px solid #1d3047;border-radius:16px;padding:20px}.label{color:#8290a3;font-size:.78rem;text-transform:uppercase;letter-spacing:1px}.value{font-size:2rem;font-weight:900;margin-top:7px}table{width:100%;border-collapse:collapse;background:#0d1b2d;border:1px solid #1d3047;border-radius:16px;overflow:hidden}th,td{text-align:left;padding:12px;border-bottom:1px solid #1d3047;font-size:.9rem}th{color:#8290a3}.ok{color:#65e6a0}.err{color:#ff8d8d}@media(max-width:750px){.grid{grid-template-columns:repeat(2,1fr)}.top{align-items:flex-start;flex-direction:column}}</style></head><body><main class="wrap"><div class="top"><div class="brand">Scam<span>Decoy</span> Monitor</div><div class="status">PRIVATE • LIVE</div></div><div class="grid" id="cards"></div><h2>Recent activity</h2><table><thead><tr><th>Time</th><th>Event</th><th>Details</th></tr></thead><tbody id="events"><tr><td colspan="3">Loading...</td></tr></tbody></table></main><script>async function refresh(){try{const s=await fetch('/monitor/stats',{credentials:'same-origin'}).then(r=>r.json());document.getElementById('cards').innerHTML='<div class="card"><div class="label">System</div><div class="value ok">'+s.status+'</div></div><div class="card"><div class="label">Active calls</div><div class="value">'+s.activeCalls+'</div></div><div class="card"><div class="label">Calls started</div><div class="value">'+s.counters.callsStarted+'</div></div><div class="card"><div class="label">Errors</div><div class="value '+(s.counters.errors?'err':'')+'">'+s.counters.errors+'</div></div>';const e=await fetch('/monitor/events?limit=30',{credentials:'same-origin'}).then(r=>r.json());document.getElementById('events').innerHTML=e.events.length?e.events.map(x=>'<tr><td>'+new Date(x.timestamp).toLocaleString()+'</td><td>'+x.type+'</td><td>'+JSON.stringify(x.data).replace(/</g,'&lt;')+'</td></tr>').join(''):'<tr><td colspan="3">No events yet.</td></tr>';}catch(e){console.error(e)}}refresh();setInterval(refresh,5000);</script></body></html>`);
+}
+
+export function monitorRequestHandler(req, res) {
+  const url = new URL(req.url || "/", "http://" + (req.headers.host || "localhost"));
+
+  if (!authorized(req)) {
+    res.writeHead(401, {
+      "WWW-Authenticate": 'Basic realm="ScamDecoy Private Monitor"',
+      "Cache-Control": "no-store"
+    });
+    return res.end("Private ScamDecoy monitoring dashboard");
+  }
+
+  if (req.method !== "GET") {
+    return sendJson(res, 405, { error: "Method not allowed" });
+  }
+
+  if (url.pathname === "/health") {
+    return sendJson(res, 200, health());
+  }
+
+  if (url.pathname === "/stats") {
+    return sendJson(res, 200, {
+      ...health(),
+      activeCallIds: [...state.activeCalls.keys()]
+    });
+  }
+
+  if (url.pathname === "/events") {
+    const limit = Math.min(
+      Math.max(Number(url.searchParams.get("limit") || 50), 1),
+      100
+    );
+    return sendJson(res, 200, {
+      events: state.recentEvents.slice(0, limit)
+    });
+  }
+
+  if (url.pathname === "/" || url.pathname === "") {
+    return sendDashboard(res);
+  }
+
+  return sendJson(res, 404, { error: "Not found" });
 }
 
 export function startMonitorServer() {
