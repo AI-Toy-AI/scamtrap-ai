@@ -73,6 +73,90 @@ SCAMDECOY WEBSITE
 =========================================================
 */
 
+
+/*
+=========================================================
+WEBSITE VOICE SAMPLE
+=========================================================
+*/
+
+app.get("/sample-audio", async (_req, res) => {
+
+  if (!OPENAI_API_KEY) {
+    return res.status(503).send("Voice sample is temporarily unavailable.");
+  }
+
+  try {
+
+    const response = await fetch(
+      "https://api.openai.com/v1/audio/speech",
+      {
+        method: "POST",
+
+        headers: {
+          "Authorization": `Bearer ${OPENAI_API_KEY}`,
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+          model: "gpt-4o-mini-tts",
+          voice: "cedar",
+          response_format: "mp3",
+          speed: 0.98,
+          input:
+            "Okay... what's going on? What kind of information? Yeah, I'm not giving that out.",
+          instructions:
+            "Sound like a normal person casually answering a phone call. Relaxed, conversational, slightly imperfect, natural pauses, not polished, not cheerful, not professional, and not like customer service. Keep the delivery short and believable."
+        })
+      }
+    );
+
+    if (!response.ok) {
+
+      const errorText = await response.text();
+
+      console.error(
+        "Voice sample generation failed:",
+        errorText
+      );
+
+      return res
+        .status(502)
+        .send("Voice sample is temporarily unavailable.");
+
+    }
+
+    const audioBuffer = Buffer.from(
+      await response.arrayBuffer()
+    );
+
+    res.setHeader(
+      "Content-Type",
+      "audio/mpeg"
+    );
+
+    res.setHeader(
+      "Cache-Control",
+      "public, max-age=3600"
+    );
+
+    res.send(audioBuffer);
+
+  } catch (err) {
+
+    console.error(
+      "Voice sample error:",
+      err.message
+    );
+
+    res
+      .status(500)
+      .send("Voice sample is temporarily unavailable.");
+
+  }
+});
+
+
 app.get("/", (_req, res) => {
 
   res.send(`<!DOCTYPE html>
@@ -1166,6 +1250,157 @@ app.get("/", (_req, res) => {
 
     }
 
+
+    
+    /* VOICE SAMPLE */
+
+    .voice-sample {
+      max-width: 900px;
+
+      margin: auto;
+
+      padding: 35px;
+
+      border-radius: 22px;
+
+      border: 1px solid #315c49;
+
+      background:
+        linear-gradient(
+          145deg,
+          #102a21,
+          #0b1728
+        );
+    }
+
+    .voice-sample-grid {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 28px;
+
+      align-items: center;
+    }
+
+    .voice-sample-copy h3 {
+      margin:
+        0 0 10px;
+
+      font-size: 1.7rem;
+    }
+
+    .voice-sample-copy p {
+      color: #aab5c4;
+
+      margin:
+        0 0 18px;
+    }
+
+    .voice-note {
+      color: #718096;
+
+      font-size: 0.82rem;
+
+      margin-top: 14px;
+    }
+
+    .sample-conversation {
+      padding: 20px;
+
+      border-radius: 17px;
+
+      background: #091523;
+
+      border: 1px solid #1c2b40;
+    }
+
+    .sample-line {
+      padding: 11px 13px;
+
+      margin: 8px 0;
+
+      border-radius: 13px;
+
+      font-size: 0.92rem;
+    }
+
+    .sample-caller {
+      background: #17273c;
+
+      color: #dce4ee;
+    }
+
+    .sample-decoy {
+      background: #173b2a;
+
+      color: #e9fff2;
+
+      margin-left: 28px;
+    }
+
+    .sample-label {
+      display: block;
+
+      font-size: 0.67rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.8px;
+
+      opacity: 0.65;
+
+      margin-bottom: 3px;
+
+      font-weight: 900;
+    }
+
+    .voice-play {
+      border: 0;
+
+      cursor: pointer;
+
+      font: inherit;
+
+      font-weight: 900;
+
+      padding: 14px 20px;
+
+      border-radius: 11px;
+
+      background: #65e6a0;
+
+      color: #06130c;
+
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+    }
+
+    .voice-play:hover {
+      transform: translateY(-2px);
+    }
+
+    .voice-play:disabled {
+      cursor: wait;
+
+      opacity: 0.7;
+    }
+
+    @media (max-width: 800px) {
+
+      .voice-sample-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .voice-sample {
+        padding: 25px;
+      }
+
+    }
+
+
   </style>
 
 </head>
@@ -2076,6 +2311,142 @@ app.get("/", (_req, res) => {
     </section>
 
 
+
+    
+    <!-- VOICE SAMPLE -->
+
+    <section id="voice-sample">
+
+      <div class="section-title">
+
+        <div class="eyebrow">
+          Hear it for yourself
+        </div>
+
+        <h2>
+          Hear ScamDecoy in action.
+        </h2>
+
+        <p>
+          Before you sign up, hear the kind of natural,
+          casual voice ScamDecoy uses when it handles a
+          suspicious call.
+        </p>
+
+      </div>
+
+
+      <div class="voice-sample">
+
+        <div class="voice-sample-grid">
+
+          <div class="voice-sample-copy">
+
+            <h3>
+              Press play. This is the idea.
+            </h3>
+
+            <p>
+              The caller talks. ScamDecoy keeps its
+              responses short, natural, and conversational.
+              No long scripted speech. No robotic greeting.
+            </p>
+
+            <button
+              class="voice-play"
+              id="voiceSampleButton"
+              type="button"
+              onclick="playVoiceSample()"
+            >
+              &#9654; Play sample call
+            </button>
+
+            <div class="voice-note">
+              AI-generated voice demonstration. This is
+              a sample, not an actual customer call.
+            </div>
+
+          </div>
+
+
+          <div class="sample-conversation">
+
+            <div class="sample-line sample-caller">
+
+              <span class="sample-label">
+                Caller
+              </span>
+
+              Hey, I'm calling about your account.
+              I just need to verify a few things.
+
+            </div>
+
+
+            <div class="sample-line sample-decoy">
+
+              <span class="sample-label">
+                ScamDecoy
+              </span>
+
+              Okay... what's going on?
+
+            </div>
+
+
+            <div class="sample-line sample-caller">
+
+              <span class="sample-label">
+                Caller
+              </span>
+
+              There was some unusual activity and
+              I need to confirm your information.
+
+            </div>
+
+
+            <div class="sample-line sample-decoy">
+
+              <span class="sample-label">
+                ScamDecoy
+              </span>
+
+              What kind of information?
+
+            </div>
+
+
+            <div class="sample-line sample-caller">
+
+              <span class="sample-label">
+                Caller
+              </span>
+
+              Your email address and&mdash;
+
+            </div>
+
+
+            <div class="sample-line sample-decoy">
+
+              <span class="sample-label">
+                ScamDecoy
+              </span>
+
+              Yeah, I'm not giving that out.
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
     <!-- FUTURE TEXT FEATURE -->
 
     <section id="future">
@@ -2401,6 +2772,103 @@ app.get("/", (_req, res) => {
 
 
 </div>
+
+
+<script>
+
+  let voiceSampleAudio = null;
+
+  async function playVoiceSample() {
+
+    const button =
+      document.getElementById(
+        "voiceSampleButton"
+      );
+
+    if (!button) {
+      return;
+    }
+
+    if (
+      voiceSampleAudio &&
+      !voiceSampleAudio.paused
+    ) {
+
+      voiceSampleAudio.pause();
+      voiceSampleAudio.currentTime = 0;
+
+      button.innerHTML =
+        "&#9654; Play sample call";
+
+      return;
+
+    }
+
+    button.disabled = true;
+    button.innerHTML = "Loading sample...";
+
+    try {
+
+      if (!voiceSampleAudio) {
+
+        voiceSampleAudio =
+          new Audio("/sample-audio");
+
+        voiceSampleAudio.addEventListener(
+          "ended",
+          () => {
+
+            button.disabled = false;
+
+            button.innerHTML =
+              "&#9654; Play sample call";
+
+          }
+        );
+
+        voiceSampleAudio.addEventListener(
+          "error",
+          () => {
+
+            button.disabled = false;
+
+            button.innerHTML =
+              "&#9654; Play sample call";
+
+            alert(
+              "The voice sample is temporarily unavailable. Please try again in a moment."
+            );
+
+          }
+        );
+
+      }
+
+      await voiceSampleAudio.play();
+
+      button.disabled = false;
+
+      button.innerHTML =
+        "&#10074;&#10074; Stop sample";
+
+    } catch (err) {
+
+      console.error(
+        "Unable to play voice sample:",
+        err
+      );
+
+      button.disabled = false;
+
+      button.innerHTML =
+        "&#9654; Play sample call";
+
+    }
+
+  }
+
+</script>
+
 
 </body>
 
