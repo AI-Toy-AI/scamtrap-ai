@@ -1240,16 +1240,16 @@ app.get("/", (_req, res) => {
 
         <a
           class="button primary"
-          href="#how"
+          href="/start"
         >
-          See how it works
+          Start 30-Day Free Trial
         </a>
 
         <a
           class="button secondary"
-          href="#future"
+          href="#how"
         >
-          What's coming next
+          See how it works
         </a>
 
       </div>
@@ -2410,6 +2410,35 @@ app.get("/", (_req, res) => {
 
 
 
+/*
+=========================================================
+SCAMDECOY GET STARTED
+=========================================================
+*/
+
+app.get("/start", (_req, res) => {
+  res.send(`<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScamDecoy - Start Your Free Trial</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#173252 0%,#08111f 45%,#050b14 100%);color:#f5f7fa;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}
+main{width:min(760px,90%);margin:0 auto;padding:45px 0 80px}a{color:inherit}.back{display:inline-block;color:#aab5c4;text-decoration:none;margin-bottom:30px}
+.card{background:#0e1b2d;border:1px solid #1c2b40;border-radius:22px;padding:32px}.badge{display:inline-block;padding:7px 13px;border-radius:999px;background:#173b2a;border:1px solid #315c49;color:#65e6a0;font-size:.78rem;font-weight:900}
+h1{font-size:clamp(2.5rem,8vw,4.5rem);line-height:1;letter-spacing:-3px;margin:20px 0 14px}.lead{color:#aab5c4;font-size:1.08rem}
+.steps{margin:28px 0;padding:0;list-style:none}.steps li{padding:13px 0;border-bottom:1px solid #1c2b40;color:#dce4ee}.steps li:last-child{border-bottom:0}.num{display:inline-grid;place-items:center;width:30px;height:30px;margin-right:10px;border-radius:50%;background:#173b2a;color:#65e6a0;font-weight:900}
+label{display:block;margin:18px 0 7px;font-weight:800}input{width:100%;padding:14px;border-radius:11px;border:1px solid #29405a;background:#08111f;color:#fff;font-size:1rem}
+button{width:100%;margin-top:22px;padding:15px;border:0;border-radius:11px;background:#65e6a0;color:#06130c;font-size:1rem;font-weight:900;cursor:pointer}.note{margin-top:18px;color:#8e9bad;font-size:.88rem}.contact{margin-top:25px;padding:18px;border-radius:14px;background:#102a21;border:1px solid #315c49}.contact a{color:#65e6a0}
+</style></head><body><main><a class="back" href="/">← Back to ScamDecoy</a><div class="card">
+<span class="badge">30-DAY FREE TRIAL</span><h1>Let's get you set up.</h1>
+<p class="lead">Tell us where to reach you and we'll walk you through the next step. You won't be asked for payment on this page.</p>
+<ul class="steps"><li><span class="num">1</span>Send us your name and email.</li><li><span class="num">2</span>We'll follow up with the next steps for your ScamDecoy trial.</li><li><span class="num">3</span>Once your service is ready, you'll be able to start using ScamDecoy to handle suspicious calls.</li></ul>
+<form action="mailto:locomotive7766@duck.com" method="post" enctype="text/plain"><label for="name">Your name</label><input id="name" name="name" type="text" required><label for="email">Email address</label><input id="email" name="email" type="email" required><button type="submit">Request My Free Trial</button></form>
+<div class="contact">Questions? Email <a href="mailto:locomotive7766@duck.com">locomotive7766@duck.com</a>.</div>
+<p class="note">The 30-day trial is subject to service availability and the final ScamDecoy subscription terms. Payment details will be handled separately once paid subscriptions are ready.</p>
+</div></main></body></html>`);
+});
 /*
 =========================================================
 SCAMDECOY PRIVACY POLICY
