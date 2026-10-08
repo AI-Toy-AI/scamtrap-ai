@@ -2317,6 +2317,10 @@ app.get("/", (_req, res) => {
 
     <section id="voice-sample">
 
+      <div style="text-align:center;margin:-8px 0 22px;">
+        <a href="#voice-sample" class="voice-play" style="display:inline-block;text-decoration:none;">&#9654; Hear a real ScamDecoy-style response</a>
+      </div>
+
       <div class="section-title">
 
         <div class="eyebrow">
