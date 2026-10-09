@@ -1425,12 +1425,20 @@ app.get("/", (_req, res) => {
         Why ScamDecoy
       </a>
 
+      <a href="#voice-sample">
+        Voice sample
+      </a>
+
       <a href="#story">
         Our Story
       </a>
 
       <a href="#how">
         How it works
+      </a>
+
+      <a href="#whats-next">
+        What's next
       </a>
 
       <a href="#faq">
@@ -1485,6 +1493,13 @@ app.get("/", (_req, res) => {
           href="#how"
         >
           See how it works
+        </a>
+
+        <a
+          class="button secondary"
+          href="#voice-sample"
+        >
+          Hear a voice sample
         </a>
 
       </div>
@@ -2105,6 +2120,91 @@ app.get("/", (_req, res) => {
             unknown callers.
           </p>
         </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- WHAT'S NEXT -->
+
+    <section id="whats-next">
+
+      <div class="section-title">
+
+        <div class="eyebrow">
+          The road ahead
+        </div>
+
+        <h2>
+          More peace of mind, built around real people.
+        </h2>
+
+        <p>
+          ScamDecoy is starting with phone-call protection.
+          These are ideas for future improvements—not features
+          that are available today.
+        </p>
+
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-icon">&#128203;</div>
+          <h3>A clearer call recap</h3>
+          <p>
+            A future customer dashboard could show basic call
+            activity and short summaries, helping you understand
+            what happened without having to handle every call yourself.
+          </p>
+          <span class="coming">Planned idea</span>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128276;</div>
+          <h3>Helpful alerts</h3>
+          <p>
+            Optional notifications could let customers know when
+            a call has been handled or when a conversation may
+            deserve a closer look.
+          </p>
+          <span class="coming">Planned idea</span>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128106;</div>
+          <h3>Protection for the people you care about</h3>
+          <p>
+            Over time, ScamDecoy may explore ways for families
+            to help one another, with clear consent and control
+            for each person using the service.
+          </p>
+          <span class="coming">Future possibility</span>
+        </div>
+
+      </div>
+
+      <div class="future-feature" style="margin-top:22px;">
+
+        <div class="future-icon">&#128172;</div>
+
+        <h3>
+          Help ScamDecoy grow by sharing it.
+        </h3>
+
+        <p>
+          A customer referral program is being considered for
+          a future launch, once subscriptions and payments are
+          ready. The goal is to thank customers who introduce
+          ScamDecoy to friends or family. Any reward, eligibility
+          rules, and timing will be published clearly before
+          the program begins.
+        </p>
+
+        <span class="future-label">
+          Referral rewards not active yet
+        </span>
 
       </div>
 
@@ -2763,6 +2863,10 @@ app.get("/", (_req, res) => {
 
       <a href="#faq" style="margin:0 10px;color:#aab5c4;">
         FAQ
+      </a>
+
+      <a href="#voice-sample" style="margin:0 10px;color:#aab5c4;">
+        Voice sample
       </a>
 
     </div>
