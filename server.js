@@ -4,6 +4,7 @@ import express from "express";
 import http from "http";
 import twilio from "twilio";
 import { WebSocketServer, WebSocket } from "ws";
+import { isBlockedNumber, blockNumber } from "./blocklist.js";
 import {
   monitorRequestHandler,
   callStarted,
@@ -3306,6 +3307,16 @@ app.all(
   "/voice",
   (req, res) => {
 
+    const callerNumber = String(req.body?.From || req.query?.From || "").trim();
+    const callSidFromWebhook = String(req.body?.CallSid || req.query?.CallSid || "").trim();
+
+    // Reject numbers already blocked before answering or starting the AI stream.
+    if (isBlockedNumber(callerNumber)) {
+      const blockedResponse = new twilio.twiml.VoiceResponse();
+      blockedResponse.reject();
+      return res.type("text/xml").send(blockedResponse.toString());
+    }
+
     const response =
       new twilio.twiml.VoiceResponse();
 
@@ -3330,10 +3341,18 @@ app.all(
       response.connect();
 
 
-    connect.stream({
+    const mediaStream = connect.stream({
       url:
         `wss://${host}/media-stream`
     });
+
+    // Twilio returns these values in the stream's start.customParameters.
+    if (callerNumber) {
+      mediaStream.parameter({ name: "callerNumber", value: callerNumber });
+    }
+    if (callSidFromWebhook) {
+      mediaStream.parameter({ name: "callSid", value: callSidFromWebhook });
+    }
 
 
     res
@@ -3399,6 +3418,7 @@ wss.on(
     let streamSid = null;
 
     let callSid = null;
+    let callerNumber = null;
 
     let openaiWs = null;
 
@@ -3683,6 +3703,23 @@ wss.on(
 
                   }
 
+                },
+
+                {
+                  type: "function",
+                  name: "block_number",
+                  description: "Add the current caller's phone number to ScamDecoy's persistent blocklist when the caller is clearly attempting a scam, impersonation, fraud, or repeated abusive unwanted contact. Do not use for ordinary, uncertain, or merely unfamiliar callers. The caller number is supplied by the system; do not ask for a number.",
+                  parameters: {
+                    type: "object",
+                    properties: {
+                      reason: {
+                        type: "string",
+                        description: "A short factual reason the caller was flagged. Do not include sensitive personal information."
+                      }
+                    },
+                    required: ["reason"],
+                    additionalProperties: false
+                  }
                 }
 
               ],
@@ -3815,6 +3852,28 @@ Listen first. React to the actual person and actual words. Do less. Let the call
           event.type ===
           "response.function_call_arguments.done"
         ) {
+
+          if (event.name === "block_number") {
+            let reason = "Flagged by ScamDecoy as a likely scam or abusive caller";
+            try {
+              const parsed = JSON.parse(event.arguments || "{}");
+              if (typeof parsed.reason === "string" && parsed.reason.trim()) {
+                reason = parsed.reason.trim().slice(0, 240);
+              }
+            } catch {}
+
+            if (callerNumber) {
+              const saved = blockNumber(callerNumber, {
+                reason,
+                callSid,
+                source: "voice-agent"
+              });
+              console.log("ScamDecoy blocklist update:", saved ? "number saved" : "number not saved", callSid || "");
+            } else {
+              console.warn("ScamDecoy could not block caller because caller ID was unavailable.", callSid || "");
+            }
+            return;
+          }
 
           if (
             event.name ===
@@ -4076,6 +4135,11 @@ Listen first. React to the actual person and actual words. Do less. Let the call
 
           callSid =
             msg.start?.callSid ||
+            msg.start?.customParameters?.callSid ||
+            null;
+
+          callerNumber =
+            msg.start?.customParameters?.callerNumber ||
             null;
 
 
