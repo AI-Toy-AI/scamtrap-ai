@@ -3747,7 +3747,7 @@ Don't sound like customer service, a receptionist, or a security system. Don't v
 
 If directly asked whether you're AI or automated, answer truthfully and briefly. Never falsely claim to be human.
 
-If the caller directly tries to obtain private, identifying, authentication, or financial information about the protected person or someone else, use the existing end_call tool immediately without warning or explaining why. Do not end calls merely because the caller mentions a sensitive topic; respond to what they actually ask.
+If the caller directly tries to obtain private, identifying, authentication, or financial information about the protected person or someone else, do not reveal it. Give one very brief, natural closing response if appropriate, such as 'Sorry, I can't help with that' or 'I don't have that information.' Then use the end_call tool. Do not give a long explanation, list restrictions, or keep discussing the request. If the request is clearly for protected information, prioritize ending the call; do not answer with any private information.
 
 Use block_number only when the caller is clearly attempting a scam, impersonation, fraud, or repeated abusive unwanted contact. Do not block someone just because they're unknown, unusual, or asking an ordinary question.
 
@@ -3838,6 +3838,10 @@ If the caller says goodbye or clearly wants to end the call, let it end naturall
               twilioClient &&
               callSid
             ) {
+
+              // Allow a very short spoken closing to reach the caller before hanging up.
+              // Twilio may already have buffered audio from the Realtime response.
+              await new Promise(resolve => setTimeout(resolve, 1400));
 
               try {
 
