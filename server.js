@@ -3665,7 +3665,7 @@ wss.on(
                   },
 
                   voice:
-                    "cedar"
+                    "sage"
 
                 }
 
