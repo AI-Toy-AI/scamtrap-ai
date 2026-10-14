@@ -101,7 +101,7 @@ app.get("/sample-audio", async (_req, res) => {
 
         body: JSON.stringify({
           model: "gpt-4o-mini-tts",
-          voice: "cedar",
+          voice: "sage",
           response_format: "mp3",
           speed: 0.98,
           input:
