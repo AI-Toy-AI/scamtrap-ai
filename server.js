@@ -105,9 +105,9 @@ app.get("/sample-audio", async (_req, res) => {
           response_format: "mp3",
           speed: 0.98,
           input:
-            "Okay... what's going on? What kind of information? Yeah, I'm not giving that out.",
+            "Hello? Oh, hi. What’s this about? ... Mm-hm, okay. I’m not sure about that.",
           instructions:
-            "Sound like a normal person casually answering a phone call. Relaxed, conversational, slightly imperfect, natural pauses, not polished, not cheerful, not professional, and not like customer service. Keep the delivery short and believable."
+            "Speak like a real person in a casual, unscripted phone conversation. Use a relaxed everyday American speaking voice, with natural rhythm and connected words. Keep the delivery understated and spontaneous, with subtle changes in pitch and pace, small natural pauses, and no exaggerated emotion. Do not sound like a narrator, voice-over, advertisement, customer-service representative, or someone reading a script. Avoid overly crisp enunciation, sing-song cadence, and dramatic pauses. Say the words as if you are responding to someone in the moment, not performing them. Do not add words beyond the supplied text."
         })
       }
     );
