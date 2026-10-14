@@ -81,82 +81,155 @@ WEBSITE VOICE SAMPLE
 =========================================================
 */
 
+// Website sample uses the same Realtime model and Sage voice as live calls.
+// The output is PCM16LE at 24 kHz, wrapped in a WAV header for browser playback.
+let sampleAudioCache = null;
+
+function makeWavHeader(pcmLength, sampleRate = 24000, channels = 1, bitsPerSample = 16) {
+  const header = Buffer.alloc(44);
+  const byteRate = sampleRate * channels * bitsPerSample / 8;
+  const blockAlign = channels * bitsPerSample / 8;
+
+  header.write("RIFF", 0);
+  header.writeUInt32LE(36 + pcmLength, 4);
+  header.write("WAVE", 8);
+  header.write("fmt ", 12);
+  header.writeUInt32LE(16, 16);
+  header.writeUInt16LE(1, 20);
+  header.writeUInt16LE(channels, 22);
+  header.writeUInt32LE(sampleRate, 24);
+  header.writeUInt32LE(byteRate, 28);
+  header.writeUInt16LE(blockAlign, 32);
+  header.writeUInt16LE(bitsPerSample, 34);
+  header.write("data", 36);
+  header.writeUInt32LE(pcmLength, 40);
+  return header;
+}
+
+function generateRealtimeSampleAudio() {
+  return new Promise((resolve, reject) => {
+    const ws = new WebSocket(
+      "wss://api.openai.com/v1/realtime?model=gpt-realtime-2.1",
+      { headers: { Authorization: `Bearer ${OPENAI_API_KEY}` } }
+    );
+
+    const chunks = [];
+    let sessionReady = false;
+    let finished = false;
+
+    const timeout = setTimeout(() => {
+      finish(new Error("Timed out generating website voice sample."));
+    }, 25000);
+
+    function finish(error, result) {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timeout);
+      try {
+        if (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING) {
+          ws.close();
+        }
+      } catch {}
+      if (error) reject(error);
+      else resolve(result);
+    }
+
+    ws.on("open", () => {
+      ws.send(JSON.stringify({
+        type: "session.update",
+        session: {
+          type: "realtime",
+          model: "gpt-realtime-2.1",
+          output_modalities: ["audio"],
+          audio: {
+            output: {
+              format: { type: "audio/pcm", rate: 24000 },
+              voice: "sage"
+            }
+          },
+          instructions: "Speak in a relaxed, everyday American voice as if casually answering an unexpected phone call. Sound spontaneous and understated, not like an announcer, actor, or customer-service agent. Use natural rhythm, connected words, and subtle pauses. Keep the delivery brief and conversational. Do not add an introduction or explain the task."
+        }
+      }));
+    });
+
+    ws.on("message", raw => {
+      let event;
+      try { event = JSON.parse(raw.toString()); }
+      catch { return; }
+
+      if (event.type === "error") {
+        finish(new Error(event.error?.message || "Realtime API returned an error."));
+        return;
+      }
+
+      if (event.type === "session.updated" && !sessionReady) {
+        sessionReady = true;
+        ws.send(JSON.stringify({
+          type: "conversation.item.create",
+          item: {
+            type: "message",
+            role: "user",
+            content: [{
+              type: "input_text",
+              text: "Say this short sample naturally, with a small pause between the thoughts: “Hello? Oh, hi. What’s this about? Mm-hm, okay. I’m not sure about that.” Keep the words exactly as written and do not add anything."
+            }]
+          }
+        }));
+        ws.send(JSON.stringify({
+          type: "response.create",
+          response: { output_modalities: ["audio"] }
+        }));
+        return;
+      }
+
+      if (event.type === "response.output_audio.delta" && typeof event.delta === "string") {
+        chunks.push(Buffer.from(event.delta, "base64"));
+        return;
+      }
+
+      if (event.type === "response.done") {
+        const pcm = Buffer.concat(chunks);
+        if (!pcm.length) {
+          finish(new Error("Realtime response contained no audio."));
+          return;
+        }
+        finish(null, Buffer.concat([makeWavHeader(pcm.length), pcm]));
+      }
+    });
+
+    ws.on("error", err => finish(err));
+    ws.on("close", () => {
+      if (!finished) finish(new Error("Realtime connection closed before the sample was ready."));
+    });
+  });
+}
+
+
 app.get("/sample-audio", async (_req, res) => {
 
   if (!OPENAI_API_KEY) {
     return res.status(503).send("Voice sample is temporarily unavailable.");
   }
 
+  // Cache the generated WAV in memory so repeat visitors do not trigger
+  // a fresh Realtime generation on every play.
+  if (sampleAudioCache) {
+    res.setHeader("Content-Type", "audio/wav");
+    res.setHeader("Cache-Control", "public, max-age=3600");
+    return res.send(sampleAudioCache);
+  }
+
   try {
-
-    const response = await fetch(
-      "https://api.openai.com/v1/audio/speech",
-      {
-        method: "POST",
-
-        headers: {
-          "Authorization": `Bearer ${OPENAI_API_KEY}`,
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          model: "gpt-4o-mini-tts",
-          voice: "sage",
-          response_format: "mp3",
-          speed: 0.98,
-          input:
-            "Hello? Oh, hi. What’s this about? ... Mm-hm, okay. I’m not sure about that.",
-          instructions:
-            "Speak like a real person in a casual, unscripted phone conversation. Use a relaxed everyday American speaking voice, with natural rhythm and connected words. Keep the delivery understated and spontaneous, with subtle changes in pitch and pace, small natural pauses, and no exaggerated emotion. Do not sound like a narrator, voice-over, advertisement, customer-service representative, or someone reading a script. Avoid overly crisp enunciation, sing-song cadence, and dramatic pauses. Say the words as if you are responding to someone in the moment, not performing them. Do not add words beyond the supplied text."
-        })
-      }
-    );
-
-    if (!response.ok) {
-
-      const errorText = await response.text();
-
-      console.error(
-        "Voice sample generation failed:",
-        errorText
-      );
-
-      return res
-        .status(502)
-        .send("Voice sample is temporarily unavailable.");
-
-    }
-
-    const audioBuffer = Buffer.from(
-      await response.arrayBuffer()
-    );
-
-    res.setHeader(
-      "Content-Type",
-      "audio/mpeg"
-    );
-
-    res.setHeader(
-      "Cache-Control",
-      "public, max-age=3600"
-    );
-
-    res.send(audioBuffer);
-
+    const audioBuffer = await generateRealtimeSampleAudio();
+    sampleAudioCache = audioBuffer;
+    res.setHeader("Content-Type", "audio/wav");
+    res.setHeader("Cache-Control", "public, max-age=3600");
+    return res.send(audioBuffer);
   } catch (err) {
-
-    console.error(
-      "Voice sample error:",
-      err.message
-    );
-
-    res
-      .status(500)
-      .send("Voice sample is temporarily unavailable.");
-
+    console.error("Realtime website voice sample failed:", err?.message || err);
+    return res.status(502).send("Voice sample is temporarily unavailable.");
   }
 });
-
 
 app.get("/", (_req, res) => {
 
