@@ -2138,7 +2138,87 @@ app.get("/", (_req, res) => {
 
     </section>
 
+```
+<!-- PROTECTING OLDER ADULTS AND VULNERABLE PEOPLE -->
 
+<section id="protecting-loved-ones">
+
+  <div class="section-title">
+
+    <div class="eyebrow">
+      Protection for the people who matter
+    </div>
+
+    <h2>
+      Helping protect older adults and vulnerable people.
+    </h2>
+
+    <p>
+      A suspicious phone call can catch anyone off guard.
+      ScamDecoy is being built to help people feel safer
+      dealing with suspicious callers—and to give families
+      greater peace of mind about the people they love.
+    </p>
+
+  </div>
+
+  <div class="difference">
+
+    <div class="difference-card featured">
+
+      <h3>
+        Independence deserves protection
+      </h3>
+
+      <p>
+        Older adults deserve to stay connected, independent,
+        and confident—not afraid to answer their phones.
+        ScamDecoy aims to help screen suspicious calls
+        without adding another complicated task to everyday life.
+      </p>
+
+      <p>
+        We also recognize that people with disabilities,
+        people experiencing isolation, and others who may
+        be more vulnerable to pressure or deception deserve
+        thoughtful, respectful protection.
+      </p>
+
+    </div>
+
+    <div class="difference-card">
+
+      <h3>
+        Peace of mind for families
+      </h3>
+
+      <p>
+        Adult children, caregivers, and loved ones often
+        worry about the calls reaching someone they care
+        about. ScamDecoy is being developed to offer an
+        additional layer of help while respecting each
+        person's privacy and independence.
+      </p>
+
+      <p>
+        Scams can affect anyone, at any age. Our goal is
+        to make suspicious calls easier to manage—not to
+        make people feel afraid or responsible for catching
+        every scam themselves.
+      </p>
+
+    </div>
+
+  </div>
+
+  <p class="section-note">
+    ScamDecoy is designed to help screen suspicious calls.
+    It cannot guarantee that every scam will be identified
+    or stopped.
+  </p>
+
+</section>
+```
     <!-- TRUST / WHAT SCAMDECOY IS NOT -->
 
     <section>
