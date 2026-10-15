@@ -15,6 +15,7 @@ const MONITOR_USER = process.env.MONITOR_USER;
 const MONITOR_PASSWORD = process.env.MONITOR_PASSWORD;
 
 fs.mkdirSync(DATA_DIR, { recursive: true });
+try { fs.chmodSync(DATA_DIR, 0o700); } catch {}
 
 const state = {
   startedAt: new Date().toISOString(),
@@ -27,7 +28,22 @@ const state = {
 function loadSavedEvents() {
   try {
     if (!fs.existsSync(LOG_FILE)) return;
-    const lines = fs.readFileSync(LOG_FILE, "utf8").split("\n").filter(Boolean).slice(-MAX_EVENTS);
+    try { fs.chmodSync(LOG_FILE, 0o600); } catch {}
+    const rawLines = fs.readFileSync(LOG_FILE, "utf8").split("\n").filter(Boolean).slice(-MAX_EVENTS);
+    // Sanitize previously saved events as well, not only new events.
+    const lines = [];
+    for (const line of rawLines) {
+      try {
+        const prior = JSON.parse(line);
+        if (!prior || !prior.type || !prior.timestamp) continue;
+        prior.data = sanitizeEventData(prior.data || {});
+        lines.push(JSON.stringify(prior));
+      } catch {}
+    }
+    try {
+      fs.writeFileSync(LOG_FILE, lines.join("\n") + (lines.length ? "\n" : ""), { encoding: "utf8", mode: 0o600 });
+      fs.chmodSync(LOG_FILE, 0o600);
+    } catch {}
     for (const line of lines) {
       try {
         const event = JSON.parse(line);
@@ -50,8 +66,21 @@ function loadSavedEvents() {
 
 loadSavedEvents();
 
+function sanitizeEventData(data = {}) {
+  const safe = {};
+  const blockedKeys = /^(callid|callsid|streamsid|callernumber|phonenumber|from|to|phone|authorization|token|password|transcript|recording|audio)$/i;
+  for (const [key, value] of Object.entries(data || {})) {
+    if (blockedKeys.test(key) || (value && typeof value === "object")) continue;
+    let cleaned = String(value ?? "");
+    cleaned = cleaned.replace(/\\+?\\d[\\d ()-]{7,}\\d/g, "[redacted-number]");
+    if (cleaned.length > 240) cleaned = cleaned.slice(0, 240) + "…";
+    safe[key] = cleaned;
+  }
+  return safe;
+}
+
 function addEvent(type, data = {}) {
-  const event = { id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`, timestamp: new Date().toISOString(), type, data };
+  const event = { id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`, timestamp: new Date().toISOString(), type, data: sanitizeEventData(data) };
   state.totalEvents += 1;
   state.recentEvents.unshift(event);
   state.recentEvents = state.recentEvents.slice(0, 100);
@@ -61,10 +90,15 @@ function addEvent(type, data = {}) {
   if (type === "warning") state.counters.warnings += 1;
   if (type === "api.error") state.counters.apiErrors += 1;
   if (type === "stream.error") state.counters.streamErrors += 1;
-  try { fs.appendFileSync(LOG_FILE, `${JSON.stringify(event)}\n`, "utf8"); } catch (error) { console.error("ScamDecoy monitor log error:", error.message); }
+  try {
+    const previous = fs.existsSync(LOG_FILE) ? fs.readFileSync(LOG_FILE, "utf8").split("\n").filter(Boolean) : [];
+    previous.push(JSON.stringify(event));
+    const retained = previous.slice(-MAX_EVENTS);
+    fs.writeFileSync(LOG_FILE, retained.join("\n") + "\n", { encoding: "utf8", mode: 0o600 });
+    try { fs.chmodSync(LOG_FILE, 0o600); } catch {}
+  } catch (error) { console.error("ScamDecoy monitor log error:", error.message); }
   return event;
 }
-
 export function recordEvent(type, data = {}) { return addEvent(type, data); }
 export function callStarted(callId, data = {}) {
   if (!callId) return null;
