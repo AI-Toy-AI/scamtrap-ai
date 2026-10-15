@@ -29,7 +29,21 @@ function loadSavedEvents() {
   try {
     if (!fs.existsSync(LOG_FILE)) return;
     try { fs.chmodSync(LOG_FILE, 0o600); } catch {}
-    const lines = fs.readFileSync(LOG_FILE, "utf8").split("\n").filter(Boolean).slice(-MAX_EVENTS);
+    const rawLines = fs.readFileSync(LOG_FILE, "utf8").split("\n").filter(Boolean).slice(-MAX_EVENTS);
+    // Sanitize previously saved events as well, not only new events.
+    const lines = [];
+    for (const line of rawLines) {
+      try {
+        const prior = JSON.parse(line);
+        if (!prior || !prior.type || !prior.timestamp) continue;
+        prior.data = sanitizeEventData(prior.data || {});
+        lines.push(JSON.stringify(prior));
+      } catch {}
+    }
+    try {
+      fs.writeFileSync(LOG_FILE, lines.join("\n") + (lines.length ? "\n" : ""), { encoding: "utf8", mode: 0o600 });
+      fs.chmodSync(LOG_FILE, 0o600);
+    } catch {}
     for (const line of lines) {
       try {
         const event = JSON.parse(line);
