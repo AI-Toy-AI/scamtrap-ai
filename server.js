@@ -3170,7 +3170,19 @@ We may share information with service providers that need it to operate ScamDeco
 
 <h2>7. Data retention</h2>
 <p>
-We retain information for as long as reasonably necessary for the purposes described in this policy, including providing the service, maintaining security and records, resolving disputes, and meeting legal or business requirements. Specific retention periods may vary by information type and service provider.
+ScamDecoy keeps different types of information for different periods, based on what is needed to operate, secure, and support the service. We do not promise that all information is immediately deleted when a call ends.
+</p>
+<p>
+For call monitoring and troubleshooting, ScamDecoy currently records limited call-event metadata, which may include a call identifier, timestamps, call start and end events, duration, status, and technical error information. This monitoring record is stored by ScamDecoy on its hosting infrastructure. It is not intended to be a recording or transcript of the conversation. We may retain these records as reasonably needed to monitor service reliability, investigate issues, protect the service, and meet legal or business requirements. We have not established a fixed public deletion period for these records yet.
+</p>
+<p>
+ScamDecoy uses Twilio for telephony and OpenAI's API for AI voice processing. These providers process information as needed to deliver their services and under their own applicable terms and data-handling policies. ScamDecoy does not currently have confirmation that its OpenAI API organization has been approved for Zero Data Retention (ZDR) or Modified Abuse Monitoring (MAM).
+</p>
+<p>
+Under OpenAI's standard API data controls, abuse-monitoring logs may contain customer content and related metadata and are generally retained for up to 30 days, unless a longer period is required by law or reasonably necessary for safety or security. This is OpenAI's standard policy, not a guarantee that every data type is retained for exactly 30 days or deleted immediately afterward. Certain API features may have separate application-state retention rules. ScamDecoy will update this notice if OpenAI confirms different controls for our account or if our service configuration changes.
+</p>
+<p>
+We do not currently advertise ScamDecoy as a Zero Data Retention service. Do not assume that call content is excluded from provider abuse-monitoring logs. We will revise this policy if ZDR or MAM is approved and enabled, while continuing to describe any relevant endpoint or feature limitations.
 </p>
 
 <h2>8. Security</h2>
