@@ -3135,10 +3135,13 @@ This Privacy Policy explains how ScamDecoy may collect, use, protect, and disclo
 
 <h2>3. Call and service information</h2>
 <p>
-When ScamDecoy handles a call, our systems may process information needed to establish, route, operate, monitor, troubleshoot, and secure the call. This can include caller and call metadata such as telephone numbers, timestamps, call duration, connection status, and technical error information.
+When ScamDecoy handles a call, Twilio and our AI voice provider process call and conversation data as needed to connect the call and generate the live voice response. This can include telephone and routing information, call audio while it is being processed, and related technical metadata. The exact data processed or retained by each provider is governed in part by that provider's configuration, terms, and data-handling policies.
 </p>
 <p>
-ScamDecoy's service may process the content of a live conversation so the voice system can respond to the caller. We do not use the service to intentionally request or collect passwords, verification codes, bank credentials, or similar sensitive information from callers.
+ScamDecoy's private owner monitoring dashboard is designed to show operational information, not the conversation itself. The current dashboard displays call-event identifiers, timestamps, duration, call status, and technical activity or error details. The dashboard code does not display caller phone numbers, call recordings, transcripts, or the content of conversations. Technical error details and provider identifiers may still be present in the event log, so the dashboard should be treated as confidential operational data and access credentials must be protected.
+</p>
+<p>
+ScamDecoy does not use the service to intentionally request passwords, verification codes, bank credentials, or similar sensitive information from callers. This does not guarantee that a caller will never say such information or that third-party providers never process it if it is spoken.
 </p>
 
 <h2>4. How we use information</h2>
@@ -3173,21 +3176,27 @@ We may share information with service providers that need it to operate ScamDeco
 ScamDecoy keeps different types of information for different periods, based on what is needed to operate, secure, and support the service. We do not promise that all information is immediately deleted when a call ends.
 </p>
 <p>
-For call monitoring and troubleshooting, ScamDecoy currently records limited call-event metadata, which may include a call identifier, timestamps, call start and end events, duration, status, and technical error information. This monitoring record is stored by ScamDecoy on its hosting infrastructure. It is not intended to be a recording or transcript of the conversation. We may retain these records as reasonably needed to monitor service reliability, investigate issues, protect the service, and meet legal or business requirements. We have not established a fixed public deletion period for these records yet.
+ScamDecoy's monitoring history is stored on its Render hosting infrastructure in a persistent data directory. The current event log records operational metadata such as a call identifier, timestamps, call start and end events, duration, completion reason, and technical error or warning details. The dashboard is not designed to store or display call audio or conversation transcripts, and the current dashboard code does not display caller phone numbers. Technical event records can include provider call/stream identifiers and error messages. These records are retained until removed under the service's maintenance or retention practices; a fixed automatic deletion period has not yet been established. We will work to minimize stored data and establish a documented retention period before broad paid launch.
 </p>
 <p>
-ScamDecoy uses Twilio for telephony and OpenAI's API for AI voice processing. These providers process information as needed to deliver their services and under their own applicable terms and data-handling policies. ScamDecoy does not currently have confirmation that its OpenAI API organization has been approved for Zero Data Retention (ZDR) or Modified Abuse Monitoring (MAM).
+ScamDecoy uses Twilio for telephony, OpenAI's API for AI voice processing, and Render for hosting. These providers may process or retain data needed to provide, secure, and troubleshoot their services under their own applicable terms and data-handling policies. ScamDecoy does not currently have confirmation that its OpenAI API organization has been approved for Zero Data Retention (ZDR) or Modified Abuse Monitoring (MAM).
 </p>
 <p>
-Under OpenAI's standard API data controls, abuse-monitoring logs may contain customer content and related metadata and are generally retained for up to 30 days, unless a longer period is required by law or reasonably necessary for safety or security. This is OpenAI's standard policy, not a guarantee that every data type is retained for exactly 30 days or deleted immediately afterward. Certain API features may have separate application-state retention rules. ScamDecoy will update this notice if OpenAI confirms different controls for our account or if our service configuration changes.
+Under OpenAI's published standard API data controls, abuse-monitoring logs may contain customer content (including prompts or responses) and related metadata and are generally retained for up to 30 days, unless a longer period is required by law or reasonably necessary for safety or security. This is OpenAI's standard policy, not a guarantee that every data type is retained for exactly 30 days or deleted immediately afterward. Certain API endpoints or features may have separate application-state retention rules. Data sent to third-party services is also subject to those providers' policies. See <a href="https://developers.openai.com/api/docs/guides/your-data" target="_blank" rel="noopener noreferrer">OpenAI's API data controls</a>.
 </p>
 <p>
-We do not currently advertise ScamDecoy as a Zero Data Retention service. Do not assume that call content is excluded from provider abuse-monitoring logs. We will revise this policy if ZDR or MAM is approved and enabled, while continuing to describe any relevant endpoint or feature limitations.
+We do not currently advertise ScamDecoy as a Zero Data Retention service. Do not assume that call content is excluded from provider abuse-monitoring logs. We will revise this notice if ZDR or MAM is approved and enabled, while continuing to describe any relevant endpoint or feature limitations.
 </p>
 
-<h2>8. Security</h2>
+<h2>8. Security and legal compliance</h2>
 <p>
-We use reasonable technical and organizational measures designed to protect information. No internet-connected service can guarantee absolute security.
+We use reasonable technical and organizational measures designed to protect information, including restricting access to the owner monitoring dashboard with credentials. No internet-connected service can guarantee absolute security. Dashboard credentials and provider credentials must be kept confidential.
+</p>
+<p>
+ScamDecoy operates from Arizona and is initially intended for Arizona customers. Arizona law may apply to call interception and monitoring, including A.R.S. § 13-3005, and Arizona's data-breach notification laws, including A.R.S. §§ 18-551 and 18-552, may apply depending on the information involved and the circumstances. Other federal or state laws may also apply, including where a caller is physically located outside Arizona. We will investigate and provide notices as required by applicable law if a qualifying security breach occurs.
+</p>
+<p>
+We aim to describe our data practices accurately and to collect and retain only information reasonably needed to operate, secure, and support ScamDecoy. Applicable consumer-protection law may also require that our privacy and security statements match actual practices.
 </p>
 
 <h2>9. Your choices and requests</h2>
@@ -3311,9 +3320,15 @@ The final launch version will state the exact cancellation timing, refund rules,
 <li>Misrepresent ScamDecoy or use it to create unlawful or deceptive schemes.</li>
 </ul>
 
-<h2>9. Calls, recordings, and consent</h2>
+<h2>9. Calls, monitoring, and consent</h2>
 <p>
-You are responsible for using ScamDecoy in compliance with applicable laws governing telephone calls, monitoring, recording, consent, privacy, and communications. Laws may vary by location and circumstance. ScamDecoy does not provide legal advice about call-recording or consent requirements.
+ScamDecoy processes live call audio through third-party telecommunications and AI voice services so it can answer and respond to calls. The current owner dashboard records limited operational event metadata and is not designed to store call recordings or transcripts. This does not mean that call audio is never processed or that third-party providers retain no information.
+</p>
+<p>
+You must use ScamDecoy only in compliance with applicable laws governing telephone calls, interception, monitoring, recording, consent, privacy, and communications. Arizona law, including A.R.S. § 13-3005, addresses interception of wire, electronic, and oral communications. The consent required can depend on the facts, the type of communication, and where the participants are located; other states' laws may apply when a caller is outside Arizona. Before using ScamDecoy with real callers, you are responsible for providing any notice and obtaining any consent required by law. ScamDecoy does not provide legal advice or guarantee that a particular call flow satisfies every applicable law.
+</p>
+<p>
+ScamDecoy is designed to screen calls, not to provide legal, financial, emergency, or law-enforcement services. Do not use it as a substitute for professional advice or for urgent emergency communications.
 </p>
 
 <h2>10. Third-party services</h2>
