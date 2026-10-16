@@ -3206,10 +3206,14 @@ This Privacy Policy explains how ScamDecoy may collect, use, protect, and disclo
 <h2>2. Information you provide</h2>
 <ul>
 <li>Account and contact information, such as your name, email address, phone number, and information you provide when requesting support.</li>
+<li>Trial-request information: if you use the website sign-up form to request a free trial, the form asks for your name and email address so ScamDecoy can respond to your request and coordinate next steps.</li>
 <li>Service information needed to provide ScamDecoy, such as the phone number or routing information associated with your service.</li>
 <li>Subscription and customer-service information.</li>
 <li>Information you voluntarily provide to us in communications.</li>
 </ul>
+<p>
+The current trial-request form sends the information you enter through your email application to ScamDecoy's listed contact email address. The form itself does not create an account or store a trial request in a ScamDecoy customer database. The email message may be processed and retained by the email providers involved, and ScamDecoy may keep it in its inbox or business records while needed to respond, coordinate setup, maintain appropriate records, or meet legal obligations.
+</p>
 
 <h2>3. Call and service information</h2>
 <p>
@@ -3227,6 +3231,7 @@ ScamDecoy does not use the service to intentionally request passwords, verificat
 <li>To provide and operate ScamDecoy.</li>
 <li>To answer and handle calls through the service.</li>
 <li>To protect the service, detect abuse, troubleshoot problems, and maintain reliability.</li>
+<li>To respond to trial requests, contact people who ask about ScamDecoy, and coordinate trial setup.</li>
 <li>To provide customer support.</li>
 <li>To manage subscriptions and billing.</li>
 <li>To improve the service and develop new features.</li>
