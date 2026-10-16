@@ -3246,7 +3246,7 @@ ScamDecoy relies on third-party providers to operate parts of the service. Depen
 For payments, ScamDecoy plans to use Square. Payment information entered into Square's checkout is processed by Square under Square's applicable terms and privacy notices. ScamDecoy does not need to receive or store your full payment-card number to process a Square checkout.
 </p>
 <p>
-Square maintains its own privacy notices and payment terms, which may apply to your interaction with Square. You can review Square's current privacy information and payment terms on Square's website.
+Square maintains its own privacy notices and payment terms, which may apply to your interaction with Square. You can review <a href="https://squareup.com/us/en/legal/general/privacy" target="_blank" rel="noopener noreferrer">Square\’s Privacy Policy</a> on Square\’s website.
 </p>
 
 <h2>6. Information we share</h2>
