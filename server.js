@@ -2138,7 +2138,6 @@ app.get("/", (_req, res) => {
 
     </section>
 
-```
 <!-- PROTECTING OLDER ADULTS AND VULNERABLE PEOPLE -->
 
 <section id="protecting-loved-ones">
@@ -2218,7 +2217,6 @@ app.get("/", (_req, res) => {
   </p>
 
 </section>
-```
     <!-- TRUST / WHAT SCAMDECOY IS NOT -->
 
     <section>
