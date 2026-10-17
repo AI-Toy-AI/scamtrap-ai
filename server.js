@@ -5,6 +5,21 @@ import http from "http";
 import twilio from "twilio";
 import { WebSocketServer, WebSocket } from "ws";
 import { isBlockedNumber, blockNumber } from "./blocklist.js";
+
+// Optional owner-controlled test-number whitelist (E.164, comma-separated).
+function normalizePhoneForWhitelist(value) {
+  const number = String(value || "").trim();
+  return /^\+[1-9]\d{7,14}$/.test(number) ? number : null;
+}
+function isWhitelistedTestNumber(value) {
+  const number = normalizePhoneForWhitelist(value);
+  if (!number) return false;
+  const configured = String(process.env.SCAMDECOY_TEST_WHITELIST || "")
+    .split(",")
+    .map(normalizePhoneForWhitelist)
+    .filter(Boolean);
+  return configured.includes(number);
+}
 import {
   monitorRequestHandler,
   callStarted,
@@ -3493,8 +3508,11 @@ app.all(
     const callerNumber = String(req.body?.From || req.query?.From || "").trim();
     const callSidFromWebhook = String(req.body?.CallSid || req.query?.CallSid || "").trim();
 
-    // Reject numbers already blocked before answering or starting the AI stream.
-    if (isBlockedNumber(callerNumber)) {
+    // Owner test whitelist bypasses the persistent blocklist for configured test numbers.
+    const isWhitelistedTestCaller = isWhitelistedTestNumber(callerNumber);
+
+    // Reject blocked numbers unless the caller is on the owner-controlled test whitelist.
+    if (!isWhitelistedTestCaller && isBlockedNumber(callerNumber)) {
       const blockedResponse = new twilio.twiml.VoiceResponse();
       blockedResponse.reject();
       return res.type("text/xml").send(blockedResponse.toString());
@@ -3993,7 +4011,9 @@ If the caller says goodbye or clearly wants to end the call, let it end naturall
               }
             } catch {}
 
-            if (callerNumber) {
+            if (isWhitelistedTestNumber(callerNumber)) {
+              console.log("ScamDecoy test whitelist: skipped blocklist update for configured test caller.");
+            } else if (callerNumber) {
               const saved = blockNumber(callerNumber, {
                 reason,
                 callSid,
