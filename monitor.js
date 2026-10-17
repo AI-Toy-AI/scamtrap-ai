@@ -270,8 +270,9 @@ function buildCards(stats){
   const today=new Date().toLocaleDateString();
   const events=stats.events||[];
   const todayStarts=events.filter(e=>e.type==="call.started" && new Date(e.timestamp).toLocaleDateString()===today).length;
-  const completed=events.filter(e=>e.type==="call.completed" && typeof e.data?.durationSeconds==="number");
-  const avg=completed.length ? Math.round(completed.reduce((sum,e)=>sum+e.data.durationSeconds,0)/completed.length) : null;
+  // Event sanitization stores scalar values as strings, so accept valid numeric strings too.
+  const completed=events.filter(e=>e.type==="call.completed" && e.data?.durationSeconds !== null && e.data?.durationSeconds !== undefined && e.data?.durationSeconds !== "" && Number.isFinite(Number(e.data.durationSeconds)));
+  const avg=completed.length ? Math.round(completed.reduce((sum,e)=>sum+Number(e.data.durationSeconds),0)/completed.length) : null;
   document.getElementById("cards").innerHTML=
     '<div class="card"><div class="label">System</div><div class="value ok">Online</div><div class="help">Monitor is responding</div></div>'+
     '<div class="card"><div class="label">Active calls</div><div class="value">'+esc(stats.activeCalls)+'</div><div class="help">Calls happening now</div></div>'+
