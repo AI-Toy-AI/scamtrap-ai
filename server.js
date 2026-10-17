@@ -3627,6 +3627,9 @@ wss.on(
 
     let initialGreetingSent = false;
     let monitorCallCompleted = false;
+    // Independent call start timestamp lets monitoring calculate duration even
+    // if its in-memory active-call map misses the matching start event.
+    let monitorCallStartedAt = null;
 
 
     /*
@@ -4304,6 +4307,7 @@ If the caller says goodbye or clearly wants to end the call, let it end naturall
             streamSid
           );
 
+          monitorCallStartedAt = Date.now();
           callStarted(callSid || streamSid, {
             callSid,
             streamSid
@@ -4377,9 +4381,13 @@ If the caller says goodbye or clearly wants to end the call, let it end naturall
 
           if (!monitorCallCompleted) {
             monitorCallCompleted = true;
+            const durationSeconds = monitorCallStartedAt == null
+              ? null
+              : Math.max(0, Math.round((Date.now() - monitorCallStartedAt) / 1000));
             callCompleted(callSid || streamSid, {
               callSid,
               streamSid,
+              ...(durationSeconds == null ? {} : { durationSeconds }),
               reason: "twilio_stop"
             });
           }
@@ -4404,9 +4412,13 @@ If the caller says goodbye or clearly wants to end the call, let it end naturall
 
         if (!monitorCallCompleted && (callSid || streamSid)) {
           monitorCallCompleted = true;
+          const durationSeconds = monitorCallStartedAt == null
+            ? null
+            : Math.max(0, Math.round((Date.now() - monitorCallStartedAt) / 1000));
           callCompleted(callSid || streamSid, {
             callSid,
             streamSid,
+            ...(durationSeconds == null ? {} : { durationSeconds }),
             reason: "twilio_close"
           });
         }
