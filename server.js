@@ -2529,11 +2529,13 @@ app.get("/", (_req, res) => {
           <div class="card-icon">R</div>
           <h3>Refunds & cancellation</h3>
           <p>
-            Subscription cancellation and refund details
-            will be presented clearly before paid service
-            begins and will be reflected in the final
-            checkout terms.
+            Review the current draft of the cancellation,
+            trial, renewal, and refund policy before paid
+            subscriptions are launched.
           </p>
+          <a class="button secondary" href="/refunds">
+            Read Refunds & Cancellation Policy
+          </a>
         </div>
 
       </div>
@@ -3470,6 +3472,68 @@ Official ScamDecoy support contact information will be published before paid sub
 </p>
 
 <p class="small">This is a business draft, not legal advice. Finalize it with the actual business identity, state of formation, governing law, subscription price, refund policy, contact information, and final service/data practices before launch.</p>
+</main>
+</body>
+</html>`);
+});
+
+
+/*
+=========================================================
+SCAMDECOY REFUNDS & CANCELLATION POLICY
+=========================================================
+*/
+
+app.get("/refunds", (_req, res) => {
+  res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScamDecoy - Refunds & Cancellation Policy</title>
+<style>
+body{margin:0;background:#08111f;color:#f5f7fa;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.7}
+main{width:min(900px,90%);margin:0 auto;padding:55px 0 80px}
+a{color:#65e6a0} h1{font-size:clamp(2.3rem,6vw,4rem);line-height:1.05}
+h2{margin-top:38px} p,li{color:#c9d2de}.notice{padding:18px;border:1px solid #315c49;background:#102a21;border-radius:14px}
+.small{color:#8e9bad;font-size:.9rem}.back{display:inline-block;margin-bottom:30px}
+</style>
+</head>
+<body>
+<main>
+<a class="back" href="/">← Back to ScamDecoy</a>
+<h1>Refunds & Cancellation Policy</h1>
+<p class="small">Draft for attorney review. Effective date: to be added before paid launch.</p>
+<div class="notice">This is a working policy draft for review. ScamDecoy has not yet launched paid subscriptions or finalized its checkout and cancellation process. This draft is not a promise of a specific refund outcome and must be completed before accepting payment.</div>
+
+<h2>1. Free trial</h2>
+<p>ScamDecoy currently describes a planned 30-day free trial. Eligibility, start and end dates, any limitations, and whether payment information is required must be disclosed clearly before a customer begins a trial. The final signup and checkout flow must explain whether the trial automatically converts to a paid subscription, the date billing would begin, the price, and how to cancel before that date. Do not assume a trial converts to paid service unless the final offer clearly says so.</p>
+
+<h2>2. Subscription charges and renewals</h2>
+<p>Before a customer subscribes, ScamDecoy will disclose the subscription price, billing frequency, applicable taxes or fees, renewal terms, and any other material conditions. Any recurring charge will be handled according to the terms presented to and accepted by the customer and applicable law.</p>
+
+<h2>3. How to cancel</h2>
+<p>The final policy must identify a working cancellation method, such as a customer account control or a clearly stated support contact. Cancellation instructions, the effective time of cancellation, and whether cancellation stops the next renewal or ends access immediately must be finalized and shown before paid subscriptions begin. Until that process is available, ScamDecoy should not accept paid subscriptions.</p>
+
+<h2>4. Refund requests</h2>
+<p>Customers may contact ScamDecoy using the published support contact to request review of a billing issue. The final policy must state whether subscriptions are refundable, whether partial-period refunds are available, how duplicate or mistaken charges are handled, and any deadlines or conditions. Nothing in this policy limits refund or cancellation rights that cannot legally be waived.</p>
+
+<h2>5. Failed payments and billing questions</h2>
+<p>The final policy must explain how customers can report an incorrect charge, what happens when a payment fails, and how billing disputes are handled. Payment processing is planned through Square, subject to final setup and confirmation. Square's own terms and procedures may also apply to payment transactions.</p>
+
+<h2>6. Contact</h2>
+<p>Current general contact: <a href="mailto:locomotive7766@duck.com">locomotive7766@duck.com</a>. The owner should confirm that this inbox is monitored for cancellation and billing requests and whether a separate support address is needed before launch.</p>
+
+<h2>Items to finalize before launch</h2>
+<ul>
+<li>Confirm the actual trial duration and exact trial-to-paid conversion terms.</li>
+<li>Confirm the public subscription price and billing frequency.</li>
+<li>Choose and test a reliable cancellation method.</li>
+<li>Decide refund rules for duplicate charges, service outages, accidental purchases, and partial billing periods.</li>
+<li>Confirm billing support response expectations and recordkeeping.</li>
+<li>Have counsel review compliance with applicable automatic-renewal, negative-option, consumer-protection, and payment laws.</li>
+</ul>
+<p class="small">Business draft for attorney review, not legal advice. Do not treat this draft as finalized until the business's actual checkout, cancellation, and refund practices match it and counsel has reviewed it.</p>
 </main>
 </body>
 </html>`);
