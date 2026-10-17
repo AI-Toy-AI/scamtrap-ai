@@ -3030,6 +3030,10 @@ app.get("/", (_req, res) => {
         Terms of Service
       </a>
 
+      <a href="/refunds" style="margin:0 10px;color:#aab5c4;">
+        Refunds &amp; Cancellation
+      </a>
+
       <a href="#faq" style="margin:0 10px;color:#aab5c4;">
         FAQ
       </a>
