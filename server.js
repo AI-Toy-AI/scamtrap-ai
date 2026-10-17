@@ -3646,7 +3646,7 @@ wss.on(
             response: {
 
               instructions:
-                "Answer the phone now. Say a single short, natural greeting such as 'Hello?' or 'Hi, hello?' in a casual everyday voice. Do not wait for the caller to speak first. After the greeting, stop speaking and listen."
+                "Answer the phone now. Say only this one short greeting: 'Hello?' Do not add any other greeting, follow-up, acknowledgement, or second sentence. As soon as you say 'Hello?', stop speaking completely and wait silently for the caller to speak. Do not generate another response unless the caller speaks first."
 
             }
 
